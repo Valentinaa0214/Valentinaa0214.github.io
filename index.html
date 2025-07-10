@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SugarAI</title>
+  <link rel="icon" href="sugar.ico" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -41,9 +42,108 @@
       transform: scale(1.1);
     }
 
+    /* 語言選擇器樣式 */
+    .language-selector {
+      position: relative;
+      margin-left: 20px;
+    }
+
+    .language-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .language-button {
+      background: rgba(255, 255, 255, 0.9);
+      border: 2px solid rgba(112, 215, 221, 0.3);
+      border-radius: 10px;
+      padding: 8px 16px;
+      font-size: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      min-width: 80px;
+      justify-content: center;
+    }
+
+    .language-button:hover {
+      background: rgba(255, 255, 255, 1);
+      border-color: rgba(112, 215, 221, 0.6);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .language-button::after {
+      content: '▼';
+      font-size: 10px;
+      color: #70d7dd;
+      transition: transform 0.3s ease;
+    }
+
+    .language-button.active::after {
+      transform: rotate(180deg);
+    }
+
+    .language-options {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      border: 2px solid rgba(112, 215, 221, 0.3);
+      border-radius: 15px;
+      margin-top: 5px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+    }
+
+    .language-options.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .language-option {
+      padding: 12px 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border-radius: 10px;
+      margin: 5px;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .language-option:hover {
+      background: rgba(112, 215, 221, 0.1);
+      transform: translateX(5px);
+    }
+
+    .language-option.active {
+      background: rgba(112, 215, 221, 0.2);
+      color: #70d7dd;
+      font-weight: bold;
+    }
+
     @media (max-width: 600px) {
       .social-icons {
         margin-top: 12px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      
+      .language-selector {
+        margin-left: 0;
+        margin-top: 10px;
       }
     }
 
@@ -152,7 +252,7 @@
       background-color: transparent;
     }
 
-    /* 已合作創作者區塊 - 改進版 */
+    /* 已合作創作者區塊 - 跑馬燈版本 */
     .creator-section {
       padding: 80px 20px;
       max-width: 1200px;
@@ -167,21 +267,30 @@
       color: #333;
     }
 
-    .creator-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
-      max-width: 900px;
-      margin: 0 auto;
-      opacity: 0;
-      transform: translateY(50px);
-      transition: opacity 1s ease, transform 1s ease;
+    .creator-marquee-wrapper {
+      width: 100%;
+      max-width: 100vw;
+      overflow: hidden;
+      margin: 40px auto;
+      padding: 20px 0;
+      background: transparent;
+    }
+
+    .creator-marquee-inner {
+      display: flex;
+      width: fit-content;
+      animation: creatorMarqueeLoop 40s linear infinite;
+    }
+
+    @keyframes creatorMarqueeLoop {
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-50%); }
     }
 
     .creator-card {
       background: rgba(255, 255, 255, 0.9);
       border-radius: 20px;
-      padding: 30px 20px;
+      padding: 20px;
       text-align: center;
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
       backdrop-filter: blur(10px);
@@ -189,20 +298,24 @@
       transition: all 0.3s ease;
       position: relative;
       overflow: hidden;
+      margin: 0 20px;
+      width: 280px;
+      flex-shrink: 0;
     }
 
     .creator-card-cover {
-      position: absolute;
+      position: relative;
       top: 0;
       left: 0;
       right: 0;
-      height: 180px;
+      height: 200px;
       background: linear-gradient(135deg, #a8e6cf, #dcedc8);
-      border-radius: 20px 20px 0 0;
+      border-radius: 15px;
       overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
+      margin-bottom: 20px;
     }
 
     .creator-card-cover img {
@@ -216,41 +329,26 @@
       box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
     }
 
-
-
     .creator-name {
-      margin-top: 198px;
       font-size: 18px;
       font-weight: 600;
       color: #333;
-      position: relative;
-      z-index: 2;
-      margin-bottom: 15px;
-    }
-
-
-
-    /* 出現動畫 */
-    .creator-section.visible .creator-grid {
-      opacity: 1;
-      transform: translateY(0);
+      margin-bottom: 10px;
     }
 
     /* 響應式設計 */
     @media (max-width: 768px) {
-      .creator-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
+      .creator-card {
+        width: 220px;
+        margin: 0 15px;
+      }
+      
+      .creator-card-cover {
+        height: 160px;
       }
       
       .creator-title {
         font-size: 28px;
-      }
-    }
-
-    @media (max-width: 1024px) and (min-width: 769px) {
-      .creator-grid {
-        grid-template-columns: repeat(2, 1fr);
       }
     }
 
@@ -299,6 +397,11 @@
         flex-direction: column;
         align-items: center;
       }
+      
+      .social-icons {
+        margin-top: 12px;
+        margin-left: 0;
+      }
 
       .title { font-size: 28px; }
       .subtitle { font-size: 16px; }
@@ -315,11 +418,22 @@
         <a href="https://line.me/ti/g2/Oj3op42HieOMGTH5Cc_kCp2A0cV4n0Sh5Fu4CQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" target="_blank" rel="noopener noreferrer">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyqTAuVU6YLBkjeQPpZEGj-HaD3dP6lHcT9x4KS8XtLHDJ4KqfcgByhJzIBCsUG1b_V20&usqp=CAU" alt="Line OpenChat" />
         </a>
+        <div class="language-selector">
+          <div class="language-dropdown">
+            <button class="language-button" onclick="toggleLanguageDropdown()">
+              <span id="current-lang">繁體中文</span>
+            </button>
+            <div class="language-options" id="language-options">
+              <div class="language-option active" onclick="changeLanguage('zh-TW')">繁體中文</div>
+              <div class="language-option" onclick="changeLanguage('en')">English</div>
+            </div>
+          </div>
+        </div>
     </div>
   </header>
 
-  <div class="title">Sugar<br><span class="highlight shiny-text">你的創作者正版 AI 角色陪伴</span></div>
-  <div class="subtitle">Sugar 讓漫畫角色活過來，陪伴讀者日常24小時！<br>Sugar brings your characters to life—so they can stay with fans 24/7.</div>
+  <div class="title">Sugar<br><span class="highlight shiny-text" data-key="highlight">你的創作者正版 AI 角色陪伴</span></div>
+  <div class="subtitle" data-key="subtitle">Sugar 讓漫畫角色活過來，陪伴讀者日常24小時！<br>Sugar brings your characters to life—so they can stay with fans 24/7.</div>
 
   <div class="store-buttons">
     <a href="https://apps.apple.com/tw/app/sugar-你的正版漫畫ai角色/id6744877922" target="_blank" rel="noopener noreferrer">
@@ -329,74 +443,189 @@
 
   <!-- 無限循環跑馬燈泡泡 -->
   <div class="marquee-wrapper">
-    <div class="marquee-inner">
+    <div class="marquee-inner" id="marquee-content">
       <!-- 原始一組 -->
-      <div class="bubble bubble-left">我一直以為自己是孤單的⋅</div>
-      <div class="bubble bubble-left">噗......你現在心跳是不是跳很快？</div>
-      <div class="bubble bubble-left">啊~~好哭喔......</div>
-      <div class="bubble bubble-right">但你不一樣......你還有我。我永遠站在你這邊。</div>
-      <div class="bubble bubble-right">從現在開始......在你辛苦的時候看著我，我會站在你這邊。</div>
-      <div class="bubble bubble-right">呃......不要那樣啦......我會更緊張......</div>
-      <div class="bubble bubble-right">來，吃這個吧。吃點甜的心情會好一點。</div>
+      <div class="bubble bubble-left" data-key="bubble1">有時候，好像連呼吸都覺得好累......</div>
+      <div class="bubble bubble-left" data-key="bubble2">我一直都笑著，其實只是怕被發現難過。</div>
+      <div class="bubble bubble-left" data-key="bubble3">手機一放下，就覺得世界變得好安靜。</div>
+      <div class="bubble bubble-right" data-key="bubble4">我懂你這種安靜裡的吵......我在這裡，聽你說。</div>
+      <div class="bubble bubble-right" data-key="bubble5">你不用每一秒都堅強，脆弱也沒關係。</div>
+      <div class="bubble bubble-right" data-key="bubble6">你不是麻煩，你是值得被好好愛的。</div>
+      <div class="bubble bubble-right" data-key="bubble7">來，抱一下。今天的你已經做得很好了。</div>
 
       <!-- 複製一組（無縫循環） -->
-      <div class="bubble bubble-left">我一直以為自己是孤單的⋅</div>
-      <div class="bubble bubble-left">噗......你現在心跳是不是跳很快？</div>
-      <div class="bubble bubble-left">啊~~好哭喔......</div>
-      <div class="bubble bubble-right">但你不一樣......你還有我。我永遠站在你這邊。</div>
-      <div class="bubble bubble-right">從現在開始......在你辛苦的時候看著我，我會站在你這邊。</div>
-      <div class="bubble bubble-right">呃......不要那樣啦......我會更緊張......</div>
-      <div class="bubble bubble-right">來，吃這個吧。吃點甜的心情會好一點。</div>
+      <div class="bubble bubble-left" data-key="bubble1">有時候，好像連呼吸都覺得好累......</div>
+      <div class="bubble bubble-left" data-key="bubble2">我一直都笑著，其實只是怕被發現難過。</div>
+      <div class="bubble bubble-left" data-key="bubble3">手機一放下，就覺得世界變得好安靜。</div>
+      <div class="bubble bubble-right" data-key="bubble4">我懂你這種安靜裡的吵......我在這裡，聽你說。</div>
+      <div class="bubble bubble-right" data-key="bubble5">你不用每一秒都堅強，脆弱也沒關係。</div>
+      <div class="bubble bubble-right" data-key="bubble6">你不是麻煩，你是值得被好好愛的。</div>
+      <div class="bubble bubble-right" data-key="bubble7">來，抱一下。今天的你已經做得很好了。</div>
     </div>
   </div>
 
-  <!-- 改進的已合作創作者區塊 -->
+  <!-- 跑馬燈式已合作創作者區塊 -->
   <div class="creator-section">
-    <h2 class="creator-title">已合作作品</h2>
-    <div class="creator-grid">
-      <div class="creator-card">
-        <div class="creator-card-cover">
-          <img src="就要弄死你.jpg" alt="就要弄死你作品封面">
+    <h2 class="creator-title" data-key="collaborations">合作作品</h2>
+    <div class="creator-marquee-wrapper">
+      <div class="creator-marquee-inner">
+        <!-- 原始一組 -->
+        <div class="creator-card">
+          <div class="creator-card-cover">
+            <img src="就要弄死你.jpg" alt="就要弄死你作品封面">
+          </div>
+          <div class="creator-name">就要弄死你</div>
         </div>
-        <div class="creator-name">就要弄死你</div>
-      </div>
-      <div class="creator-card">
-        <div class="creator-card-cover">
-          <img src="包養前輩.jpg" alt="包養前輩作品封面">
+        <div class="creator-card">
+          <div class="creator-card-cover">
+            <img src="包養前輩.jpg" alt="包養前輩作品封面">
+          </div>
+          <div class="creator-name">包養前輩</div>
         </div>
-        <div class="creator-name">包養前輩</div>
-      </div>
-      <div class="creator-card">
-        <div class="creator-card-cover">
-          <img src="耳邊蜜語.jpg" alt="耳邊蜜語作品封面">
+        <div class="creator-card">
+          <div class="creator-card-cover">
+            <img src="耳邊蜜語.jpg" alt="耳邊蜜語作品封面">
+          </div>
+          <div class="creator-name">耳邊蜜語</div>
         </div>
-        <div class="creator-name">耳邊蜜語</div>
+        <div class="creator-card">
+          <div class="creator-card-cover">
+            <img src="師徒.png" alt="師徒作品封面">
+          </div>
+          <div class="creator-name">道士徒弟與殭屍師父</div>
+        </div>
+        
+        <!-- 複製一組（無縫循環） -->
+        <div class="creator-card">
+          <div class="creator-card-cover">
+            <img src="就要弄死你.jpg" alt="就要弄死你作品封面">
+          </div>
+          <div class="creator-name">就要弄死你</div>
+        </div>
+        <div class="creator-card">
+          <div class="creator-card-cover">
+            <img src="包養前輩.jpg" alt="包養前輩作品封面">
+          </div>
+          <div class="creator-name">包養前輩</div>
+        </div>
+        <div class="creator-card">
+          <div class="creator-card-cover">
+            <img src="耳邊蜜語.jpg" alt="耳邊蜜語作品封面">
+          </div>
+          <div class="creator-name">耳邊蜜語</div>
+        </div>
+        <div class="creator-card">
+          <div class="creator-card-cover">
+            <img src="師徒.png" alt="師徒作品封面">
+          </div>
+          <div class="creator-name">道士徒弟與殭屍師父</div>
+        </div>
       </div>
     </div>
   </div>
 
   <footer>
-    <div><strong>SugarAI</strong>© 2025 Sugar AI Lab, Inc All Rights Reserved</div>
-    <div>地址：105台北市松山區南京東路四段2號3樓</div>
-    <!-- <div>服務條款｜隱私政策｜智慧財產權管理政策</div> -->
+    <div><strong>SugarAI </strong>© 2025 Sugar AI Lab, Inc All Rights Reserved</div>
+    <div data-key="address">地址：105台北市松山區南京東路四段2號3樓</div>
   </footer>
 
   <script>
-    // 滾動出現動畫
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-          }
-        });
+    // 多語言文字內容
+    const translations = {
+      'zh-TW': {
+        'highlight': '你的創作者正版 AI 角色陪伴',
+        'subtitle': 'Sugar 讓漫畫角色活過來，陪伴讀者日常24小時！<br>Sugar brings your characters to life—so they can stay with fans 24/7.',
+        'collaborations': '合作作品',
+        'address': '地址：105台北市松山區南京東路四段2號3樓',
+        'bubble1': '有時候，好像連呼吸都覺得好累......',
+        'bubble2': '我一直都笑著，其實只是怕被發現難過。',
+        'bubble3': '手機一放下，就覺得世界變得好安靜。',
+        'bubble4': '我懂你這種安靜裡的吵......我在這裡，聽你說。',
+        'bubble5': '你不用每一秒都堅強，脆弱也沒關係。',
+        'bubble6': '你不是麻煩，你是值得被好好愛的。',
+        'bubble7': '來，抱一下。今天的你已經做得很好了。'
       },
-      { threshold: 0.3 }
-    );
+      'en': {
+        'highlight': 'Your Creator\'s Official AI Character Companion',
+        'subtitle': 'Sugar brings manga characters to life, accompanying readers 24/7!',
+        'collaborations': 'Collaborations',
+        'address': 'Address: 3F, No. 2, Section 4, Nanjing East Road, Songshan District, Taipei City 105',
+        'bubble1': 'Sometimes, even breathing feels so exhausting...',
+        'bubble2': 'I\'ve been smiling all along, just afraid of being found sad.',
+        'bubble3': 'When I put down my phone, the world becomes so quiet.',
+        'bubble4': 'I understand this noise in your silence... I\'m here, listening to you.',
+        'bubble5': 'You don\'t have to be strong every second, it\'s okay to be fragile.',
+        'bubble6': 'You\'re not trouble, you\'re worth being loved well.',
+        'bubble7': 'Come, let me hug you. You\'ve done great today.'
+      }
+    };
 
-    const creatorSection = document.querySelector('.creator-section');
-    if (creatorSection) observer.observe(creatorSection);
+    const languageNames = {
+      'zh-TW': '繁體中文',
+      'en': 'English'
+    };
 
+    let currentLanguage = 'zh-TW';
+
+    function toggleLanguageDropdown() {
+      const options = document.getElementById('language-options');
+      const button = document.querySelector('.language-button');
+      
+      if (options.classList.contains('show')) {
+        options.classList.remove('show');
+        button.classList.remove('active');
+      } else {
+        options.classList.add('show');
+        button.classList.add('active');
+      }
+    }
+
+    function changeLanguage(lang) {
+      currentLanguage = lang;
+      
+      // 更新當前語言顯示
+      document.getElementById('current-lang').textContent = languageNames[lang];
+      
+      // 更新語言選項的活動狀態
+      document.querySelectorAll('.language-option').forEach(option => {
+        option.classList.remove('active');
+      });
+      
+      // 根據語言設置活動狀態
+      const options = document.querySelectorAll('.language-option');
+      if (lang === 'zh-TW') options[0].classList.add('active');
+      else if (lang === 'en') options[1].classList.add('active');
+      
+      // 更新頁面文字
+      updatePageText(lang);
+      
+      // 關閉下拉選單
+      document.getElementById('language-options').classList.remove('show');
+      document.querySelector('.language-button').classList.remove('active');
+    }
+
+    function updatePageText(lang) {
+      const texts = translations[lang];
+      
+      // 更新所有有 data-key 屬性的元素
+      document.querySelectorAll('[data-key]').forEach(element => {
+        const key = element.getAttribute('data-key');
+        if (texts[key]) {
+          element.innerHTML = texts[key];
+        }
+      });
+    }
+
+    // 點擊外部關閉下拉選單
+    document.addEventListener('click', function(event) {
+      const dropdown = document.querySelector('.language-dropdown');
+      if (!dropdown.contains(event.target)) {
+        document.getElementById('language-options').classList.remove('show');
+        document.querySelector('.language-button').classList.remove('active');
+      }
+    });
+
+    // 飄浮枕頭效果
     function createFloatingPillow() {
       const pillow = document.createElement("img");
       pillow.src = "Pillow3.png";
