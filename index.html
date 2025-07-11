@@ -103,8 +103,7 @@
       backdrop-filter: blur(10px);
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
       z-index: 1000;
-      /* min-width: 140px; 保證下拉選單夠寬 */
-      width: max-content; /* 自動撐開 */
+      width: max-content;
       white-space: nowrap;
     }
 
@@ -258,7 +257,6 @@
     /* 已合作創作者區塊 - 跑馬燈版本 */
     .creator-section {
       padding: 80px 20px;
-      /* max-width: 1200px; */
       margin: 0 auto;
     }
 
@@ -274,7 +272,7 @@
       width: 100%;
       max-width: 100vw;
       overflow-x: visible;
-      overflow-y: visible; /* 允許上下超出 */
+      overflow-y: visible;
       margin: 40px 0;
       padding: 0;
       background: transparent;
@@ -312,7 +310,7 @@
       top: 0;
       left: 0;
       right: 0;
-      aspect-ratio: 16 / 9; /* 強制 1920:1080 比例 */
+      aspect-ratio: 16 / 9;
       background: linear-gradient(135deg, #a8e6cf, #dcedc8);
       border-radius: 15px;
       overflow: hidden;
@@ -325,7 +323,7 @@
     .creator-card-cover img {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* 保持比例並裁切填滿 */
+      object-fit: cover;
     }
 
     .creator-card:hover {
@@ -478,31 +476,31 @@
           <div class="creator-card-cover">
             <img src="就要弄死你.png" alt="就要弄死你作品封面">
           </div>
-          <div class="creator-name">就要弄死你</div>
+          <div class="creator-name" data-key="work1">就要弄死你</div>
         </div>
         <div class="creator-card">
           <div class="creator-card-cover">
             <img src="包養前輩.png" alt="包養前輩作品封面">
           </div>
-          <div class="creator-name">包養前輩</div>
+          <div class="creator-name" data-key="work2">包養前輩</div>
         </div>
         <div class="creator-card">
           <div class="creator-card-cover">
             <img src="耳邊蜜語.png" alt="耳邊蜜語作品封面">
           </div>
-          <div class="creator-name">耳邊蜜語</div>
+          <div class="creator-name" data-key="work3">耳邊蜜語</div>
         </div>
         <div class="creator-card">
           <div class="creator-card-cover">
             <img src="道士徒弟與殭屍師父.png" alt="師徒作品封面">
           </div>
-          <div class="creator-name">道士徒弟與殭屍師父</div>
+          <div class="creator-name" data-key="work4">道士徒弟與殭屍師父</div>
         </div>
         <div class="creator-card">
           <div class="creator-card-cover">
             <img src="雨過天晴.png" alt="雨過天晴作品封面">
           </div>
-          <div class="creator-name">雨過天晴</div>
+          <div class="creator-name" data-key="work5">雨過天晴</div>
         </div>
         
         <!-- 複製一組（無縫循環） -->
@@ -510,31 +508,31 @@
           <div class="creator-card-cover">
             <img src="就要弄死你.png" alt="就要弄死你作品封面">
           </div>
-          <div class="creator-name">就要弄死你</div>
+          <div class="creator-name" data-key="work1">就要弄死你</div>
         </div>
         <div class="creator-card">
           <div class="creator-card-cover">
             <img src="包養前輩.png" alt="包養前輩作品封面">
           </div>
-          <div class="creator-name">包養前輩</div>
+          <div class="creator-name" data-key="work2">包養前輩</div>
         </div>
         <div class="creator-card">
           <div class="creator-card-cover">
             <img src="耳邊蜜語.png" alt="耳邊蜜語作品封面">
           </div>
-          <div class="creator-name">耳邊蜜語</div>
+          <div class="creator-name" data-key="work3">耳邊蜜語</div>
         </div>
         <div class="creator-card">
           <div class="creator-card-cover">
             <img src="道士徒弟與殭屍師父.png" alt="師徒作品封面">
           </div>
-          <div class="creator-name">道士徒弟與殭屍師父</div>
+          <div class="creator-name" data-key="work4">道士徒弟與殭屍師父</div>
         </div>
         <div class="creator-card">
           <div class="creator-card-cover">
             <img src="雨過天晴.png" alt="雨過天晴作品封面">
           </div>
-          <div class="creator-name">雨過天晴</div>
+          <div class="creator-name" data-key="work5">雨過天晴</div>
         </div>
       </div>
     </div>
@@ -550,7 +548,7 @@
     const translations = {
       'zh-TW': {
         'highlight': '你的創作者正版 AI 角色陪伴',
-        'subtitle': 'Sugar 讓漫畫角色活過來，陪伴讀者日常24小時！<br>Sugar brings your characters to life—so they can stay with fans 24/7.',
+        'subtitle': 'Sugar 讓漫畫角色活過來，陪伴讀者日常24小時！<br>Sugar brings manga characters to life, turning them into 24/7 companions for every fan, anytime, anywhere.',
         'collaborations': '合作作品',
         'address': '地址：105台北市松山區南京東路四段2號3樓',
         'bubble1': '有時候，好像連呼吸都覺得好累......',
@@ -559,11 +557,16 @@
         'bubble4': '我懂你這種安靜裡的吵......我在這裡，聽你說。',
         'bubble5': '你不用每一秒都堅強，脆弱也沒關係。',
         'bubble6': '你不是麻煩，你是值得被好好愛的。',
-        'bubble7': '來，抱一下。今天的你已經做得很好了。'
+        'bubble7': '來，抱一下。今天的你已經做得很好了。',
+        'work1': '就要弄死你',
+        'work2': '包養前輩',
+        'work3': '耳邊蜜語',
+        'work4': '道士徒弟與殭屍師父',
+        'work5': '雨過天晴'
       },
       'en': {
         'highlight': 'Your Creator\'s Official AI Character Companion',
-        'subtitle': 'Sugar brings manga characters to life, accompanying readers 24/7!',
+        'subtitle': 'Sugar brings manga characters to life, turning them into 24/7 companions for every fan, anytime, anywhere.',
         'collaborations': 'Collaborations',
         'address': 'Address: 3F, No. 2, Section 4, Nanjing East Road, Songshan District, Taipei City 105',
         'bubble1': 'Sometimes, even breathing feels so exhausting...',
@@ -572,7 +575,12 @@
         'bubble4': 'I understand this noise in your silence... I\'m here, listening to you.',
         'bubble5': 'You don\'t have to be strong every second, it\'s okay to be fragile.',
         'bubble6': 'You\'re not trouble, you\'re worth being loved well.',
-        'bubble7': 'Come, let me hug you. You\'ve done great today.'
+        'bubble7': 'Come, let me hug you. You\'ve done great today.',
+        'work1': 'Robber and Thief',
+        'work2': 'Be my sugar baby',
+        'work3': 'Sweet Whispers',
+        'work4': '道士徒弟與殭屍師父',
+        'work5': 'After Raining'
       }
     };
 
