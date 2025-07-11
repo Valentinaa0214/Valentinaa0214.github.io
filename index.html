@@ -426,7 +426,7 @@
               <span id="current-lang">繁體中文</span>
             </button>
             <div class="language-options" id="language-options">
-              <div class="language-option active" onclick="changeLanguage('zh-TW')">繁體中文</div>
+              <div class="language-option" onclick="changeLanguage('zh-TW')">繁體中文</div>
               <div class="language-option" onclick="changeLanguage('en')">English</div>
             </div>
           </div>
@@ -579,7 +579,7 @@
         'work1': 'Robber and Thief',
         'work2': 'Be my sugar baby',
         'work3': 'Sweet Whispers',
-        'work4': '道士徒弟與殭屍師父',
+        'work4': 'Taoist Apprentice and Zombie Master',
         'work5': 'After Raining'
       }
     };
@@ -590,6 +590,21 @@
     };
 
     let currentLanguage = 'zh-TW';
+
+    // 從 URL 路徑檢測語言
+    function detectLanguageFromURL() {
+      const path = window.location.pathname;
+      if (path.includes('/en')) {
+        return 'en';
+      }
+      return 'zh-TW';
+    }
+
+    // 初始化語言
+    function initializeLanguage() {
+      const urlLanguage = detectLanguageFromURL();
+      changeLanguage(urlLanguage, false); // false 表示不改變 URL
+    }
 
     function toggleLanguageDropdown() {
       const options = document.getElementById('language-options');
@@ -604,8 +619,11 @@
       }
     }
 
-    function changeLanguage(lang) {
+    function changeLanguage(lang, updateURL = true) {
       currentLanguage = lang;
+      
+      // 更新 HTML lang 屬性
+      document.documentElement.lang = lang === 'en' ? 'en' : 'zh-Hant';
       
       // 更新當前語言顯示
       document.getElementById('current-lang').textContent = languageNames[lang];
@@ -626,6 +644,12 @@
       // 關閉下拉選單
       document.getElementById('language-options').classList.remove('show');
       document.querySelector('.language-button').classList.remove('active');
+      
+      // 更新 URL（如果需要）
+      if (updateURL) {
+        const newPath = lang === 'en' ? '/en' : '/';
+        window.history.pushState({}, '', newPath);
+      }
     }
 
     function updatePageText(lang) {
@@ -639,6 +663,12 @@
         }
       });
     }
+
+    // 處理瀏覽器前進後退
+    window.addEventListener('popstate', function(event) {
+      const urlLanguage = detectLanguageFromURL();
+      changeLanguage(urlLanguage, false);
+    });
 
     // 點擊外部關閉下拉選單
     document.addEventListener('click', function(event) {
@@ -670,6 +700,9 @@
     }
 
     setInterval(createFloatingPillow, 800);
+
+    // 頁面載入時初始化語言
+    document.addEventListener('DOMContentLoaded', initializeLanguage);
   </script>
 </body>
 </html>
