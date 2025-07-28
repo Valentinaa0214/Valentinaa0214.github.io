@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css">
+
+  <title>SugarAI</title>
+  <link rel="icon" href="sugar.ico" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <img class="logo" src="img\LOGO長方形_透明.png" alt="SugarAI logo">
+    <div class="social-icons">
+      <a href="https://www.instagram.com/sugar.ai.tw/" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram" />
+      </a>
+      <a href="https://line.me/ti/g2/Oj3op42HieOMGTH5Cc_kCp2A0cV4n0Sh5Fu4CQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" target="_blank" rel="noopener noreferrer">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyqTAuVU6YLBkjeQPpZEGj-HaD3dP6lHcT9x4KS8XtLHDJ4KqfcgByhJzIBCsUG1b_V20&usqp=CAU" alt="Line OpenChat" />
+      </a>
+      <div class="language-selector">
+        <div class="language-dropdown">
+          <button class="language-button" onclick="toggleLanguageDropdown()">
+            <span id="current-lang">English</span>
+          </button>
+          <div class="language-options" id="language-options">
+            <div class="language-option" onclick="switchTo('zh-TW')">繁體中文</div>
+            <div class="language-option active" onclick="switchTo('en')">English</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="title">
+    <span class="title-main">SUGAR</span>
+    <span class="highlight shiny-text">Your Creator's Official AI Character Companion</span>
+  </div>
+  <div class="subtitle">Sugar brings manga characters to life, turning them into 24/7 companions for every fan, anytime, anywhere.</div>
+  <div class="store-buttons">
+    <a href="https://apps.apple.com/tw/app/sugar-你的正版漫畫ai角色/id6744877922" target="_blank" rel="noopener noreferrer">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU5pLikz2V0k0Y58x9SevmC50UpnKqBoqLNsjzh0EpP569hYsN" alt="App Store">
+    </a>
+  </div>
+ 
+  <!-- 跑馬燈式已合作創作者區塊 -->
+  <div class="creator-section">
+    <h2 class="creator-title">Collaborations</h2>
+    <div class="creator-marquee-wrapper">
+      <div class="creator-marquee-inner">
+        <div class="creator-card">
+          <div class="creator-card-cover">
+            <img src="img\就要弄死你.png" alt="就要弄死你作品封面">
+          </div>
+          <div class="creator-name">Robber and Thief</div>
+        </div>
+        <div class="creator-card">
+          <div class="creator-card-cover">
+            <img src="img\包養前輩.png" alt="包養前輩作品封面">
+          </div>
+          <div class="creator-name">Be my sugar baby</div>
+        </div>
+        <div class="creator-card">
+          <div class="creator-card-cover">
+            <img src="img\耳邊蜜語.png" alt="耳邊蜜語作品封面">
+          </div>
+          <div class="creator-name">Sweet Whispers</div>
+        </div>
+        <!-- 複製一組 -->
+        <div class="creator-card">
+          <div class="creator-card-cover">
+            <img src="img\就要弄死你.png" alt="就要弄死你作品封面">
+          </div>
+          <div class="creator-name">Robber and Thief</div>
+        </div>
+        <div class="creator-card">
+          <div class="creator-card-cover">
+            <img src="img\包養前輩.png" alt="包養前輩作品封面">
+          </div>
+          <div class="creator-name">Be my sugar baby</div>
+        </div>
+        <div class="creator-card">
+          <div class="creator-card-cover">
+            <img src="img\耳邊蜜語.png" alt="耳邊蜜語作品封面">
+          </div>
+          <div class="creator-name">Sweet Whispers</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Meet Sugar 區塊 -->
+  <div class="meet-sugar-box scroll-fade-in-left">
+    <h2 class="meet-sugar-heading">Meet Sugar</h2>
+    <p>
+      Sugar believes characters deserve to grow, evolve, and keep connecting with fans long after the last panel or episode.
+      That′s why we work hand-in-hand with manga, webtoon, and story creators to turn their original characters into interactive experiences.
+      Fans don′t just read or watch anymore—they chat, laugh, flirt, and bond with the characters they love.
+    </p>
+    <p>
+      Unlike traditional AI platforms, Sugar is built on respect, rights, and real collaboration.
+      Every character is 100% creator-approved. Every dialogue is shaped by the voice and vision of its original artist.
+      We′re not here to replace human creativity, we′re here to amplify it.
+    </p>
+    <div class="bubble-decor"></div>
+  </div>
+
+
+  <!-- About Us 區塊 -->
+  <div class="meet-sugar-box about-us-box scroll-fade-in-left">
+    <!-- logo 泡泡們 -->
+    <img class="logo-bubble bubble-webtoon" src="img/Webtoon.png" alt="Webtoon Logo" />
+    <img class="logo-bubble bubble-itri" src="img/itri.png" alt="ITRI Logo" />
+    <img class="logo-bubble bubble-nasa" src="img/NASA.png" alt="NASA Logo" />
+    <img class="logo-bubble bubble-twitch" src="img/twitch.png" alt="Twitch Logo" />
+    <img class="logo-bubble bubble-line" src="img/LINE.svg" alt="LINE Logo" />
+    <img class="logo-bubble bubble-google" src="img/Google.png" alt="Google Logo" />
+    <img class="logo-bubble bubble-guitar" src="img/Guitar_hero.png" alt="Guitar Hero Logo" />
+
+    <!-- 文字區 -->
+    <h2 class="about-us-heading">About Us</h2>
+    <div class="about-us-content">
+      <div class="about-us-text">
+        <p>Sugar AI is backed by the co-founder of Twitch, Kevin Lin, and Kai Huang (Co-founder of Guitar Hero), with official collaboration from LINE WEBTOON.</p>
+        <p>Our team is a group of anime, manga, and game lovers turned builders.</p>
+        <p>
+          We’ve earned global recognition, including:<br />
+          🏆 NASA Global Space Apps Challenge (2023) – Award Winner<br />
+          🥇 Google Product Sprint (2023) – “Best Product of the Year”
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+
+   <!--Vision & Mission 區塊 -->
+  <div class="info-box vision-mission-box scroll-fade-in-left">
+    <h2 class="info-title">Vision & Mission</h2>
+    <div class="vm-columns">
+      <div class="vm-card">
+        <h3 class="vm-heading">Vision</h3>
+        <p>
+          Create a world where every creator’s character can live on,<br>
+          beyond the page and into people’s lives.
+        </p>
+      </div>
+      <div class="vm-card">
+        <h3 class="vm-heading">Mission</h3>
+        <p>
+          Empower creators to extend the life of their characters by offering tools to build a 24/7 interactive experience,<br>
+          while always keeping full creative control in their hands.
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+  <!--For Creators 區塊 -->
+  <div class="info-box for-creators-box scroll-fade-in-left">
+    <h2 class="info-title">For Creators</h2>
+    <div class="for-creators-content">
+      <p>
+        We’re currently inviting select creators to bring their characters to Sugar.
+      </p>
+      <p>
+        All collaborations are <span class="highlight-keyword">creator-led</span>, 
+        <span class="highlight-keyword">fully credited</span>, and based on a <span class="highlight-keyword">transparent revenue share model</span>.
+      </p>
+      <p>
+        Whether you’re a manga artist, webtoon creator, indie novelist, or character designer—
+        <br />Sugar is your playground.
+      </p>
+    </div>
+  </div>
+
+
+  <!--Hear From Our Partner 區塊 -->
+  <div class="info-box partner-quote-box scroll-fade-in-left">
+    <h2 class="info-title">Hear From Our Partner</h2>
+    <div class="partner-quote-content">
+      <div class="partner-quote-image">
+        <img src="partner_quote_illustration.png" alt="Partner Illustration" />
+      </div>
+      <div class="partner-quote-text">
+        <p class="quote">
+          “Sugar really let me reimagine how my characters live and breathe.”
+        </p>
+        <p class="quote-meta">– Webtoon Creator, Taiwan</p>
+      </div>
+    </div>
+  </div>
+
+  <!--FAQ 區塊 -->
+  <div class="info-box faq-box scroll-fade-in-left">
+    <h2 class="info-title">FAQ: IP Rights & Control</h2>
+    <div class="faq-columns">
+      <div class="faq-card">
+        <h3 class="faq-question">Who owns the character?</h3>
+        <p class="faq-answer">
+          You do. Sugar is a platform—not a publisher. You retain full ownership.
+        </p>
+      </div>
+      <div class="faq-card">
+        <h3 class="faq-question">Who decides what they say?</h3>
+        <p class="faq-answer">
+          You do. All dialogue is shaped with your guidance and approval.
+        </p>
+      </div>
+      <div class="faq-card">
+        <h3 class="faq-question">Can I remove my character?</h3>
+        <p class="faq-answer">
+          Yes. You can pause or end collaboration anytime.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="info-box faq-box scroll-fade-in-left">
+    <h2 class="info-title">FAQ: Revenue & Monetization</h2>
+    <div class="faq-columns">
+      <div class="faq-card">
+        <h3 class="faq-question">Do I get paid?</h3>
+        <p class="faq-answer">
+          Yes. We share revenue for all in-app purchases linked to your character.
+        </p>
+      </div>
+      <div class="faq-card">
+        <h3 class="faq-question">How is revenue tracked?</h3>
+        <p class="faq-answer">
+          Through detailed dashboards that show earnings, messages, and engagement.
+        </p>
+      </div>
+      <div class="faq-card">
+        <h3 class="faq-question">When do I get paid?</h3>
+        <p class="faq-answer">
+          Payouts happen monthly with a clear revenue breakdown.
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <footer>
+    <div><strong>SugarAI</strong>© 2025 Sugar AI Lab, Inc All Rights Reserved</div>
+    <div>地址：105台北市松山區南京東路四段2號3樓</div>
+  </footer>
+  <script>
+    function toggleLanguageDropdown() {
+      const options = document.getElementById('language-options');
+      const button = document.querySelector('.language-button');
+      options.classList.toggle('show');
+      button.classList.toggle('active');
+    }
+    function switchTo(lang) {
+      if (lang === 'en') window.location.href = '/en';
+      if (lang === 'zh-TW') window.location.href = '/';
+    }
+    document.addEventListener('click', function (event) {
+      const dropdown = document.querySelector('.language-dropdown');
+      if (!dropdown.contains(event.target)) {
+        document.getElementById('language-options').classList.remove('show');
+        document.querySelector('.language-button').classList.remove('active');
+      }
+    });
+
+    function onScrollAnimate() {
+    const targets = document.querySelectorAll('.scroll-fade-in-left');
+    targets.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.9) {
+        el.classList.add('show');
+      }
+    });
+  }
+  window.addEventListener('scroll', onScrollAnimate);
+  window.addEventListener('load', onScrollAnimate);
+
+
+    // 飄浮枕頭效果
+    function createFloatingPillow() {
+      const pillow = document.createElement("img");
+      pillow.src = "img/Pillow3.png";
+      pillow.classList.add("floating-pillow");
+      pillow.style.left = Math.random() * window.innerWidth + "px";
+      pillow.style.top = Math.random() * window.innerHeight + "px";
+      const size = 40 + Math.random() * 80;
+      pillow.style.width = size + "px";
+      pillow.style.height = size + "px";
+      document.body.appendChild(pillow);
+      setTimeout(() => { pillow.remove(); }, 12000);
+    }
+    setInterval(createFloatingPillow, 800);
+  </script>
+</body>
+</html>

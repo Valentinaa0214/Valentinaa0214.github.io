@@ -1,12 +1,5 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
-<script>
-if (sessionStorage.redirect) {
-  const redirectTo = sessionStorage.redirect;
-  sessionStorage.removeItem('redirect');
-  history.replaceState(null, null, redirectTo);
-}
-</script>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -20,49 +13,35 @@ if (sessionStorage.redirect) {
       background: linear-gradient(120deg, #ffe4ec, #e0f5ff);
       color: #333;
     }
-
     header {
       display: flex;
       align-items: center;
       padding: 20px 40px;
       background-color: transparent;
     }
-
     .logo {
       height: 50px;
     }
-
     .social-icons {
       margin-left: auto;
       display: flex;
       gap: 16px;
       align-items: center;
     }
-
     .social-icons img {
       width: 28px;
       height: 28px;
       transition: transform 0.3s;
     }
-
     .social-icons img:hover {
       transform: scale(1.1);
     }
-
     /* 語言選擇器樣式 */
-    .language-selector {
-      position: relative;
-      margin-left: 20px;
-    }
-
-    .language-dropdown {
-      position: relative;
-      display: inline-block;
-    }
-
+    .language-selector { position: relative; margin-left: 20px; }
+    .language-dropdown { position: relative; display: inline-block; }
     .language-button {
-      background: rgba(255, 255, 255, 0.9);
-      border: 2px solid rgba(112, 215, 221, 0.3);
+      background: rgba(255,255,255,0.9);
+      border: 2px solid rgba(112,215,221,0.3);
       border-radius: 10px;
       padding: 8px 16px;
       font-size: 14px;
@@ -75,32 +54,25 @@ if (sessionStorage.redirect) {
       min-width: 80px;
       justify-content: center;
     }
-
     .language-button:hover {
-      background: rgba(255, 255, 255, 1);
-      border-color: rgba(112, 215, 221, 0.6);
+      background: rgba(255,255,255,1);
+      border-color: rgba(112,215,221,0.6);
       transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
-
     .language-button::after {
       content: '▼';
       font-size: 10px;
       color: #70d7dd;
       transition: transform 0.3s ease;
     }
-
-    .language-button.active::after {
-      transform: rotate(180deg);
-    }
-
+    .language-button.active::after { transform: rotate(180deg);}
     .language-options {
       position: absolute;
       top: 100%;
-      left: 0;
-      right: 0;
-      background: rgba(255, 255, 255, 0.95);
-      border: 2px solid rgba(112, 215, 221, 0.3);
+      left: 0; right: 0;
+      background: rgba(255,255,255,0.95);
+      border: 2px solid rgba(112,215,221,0.3);
       border-radius: 15px;
       margin-top: 5px;
       opacity: 0;
@@ -108,18 +80,16 @@ if (sessionStorage.redirect) {
       transform: translateY(-10px);
       transition: all 0.3s ease;
       backdrop-filter: blur(10px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
       z-index: 1000;
       width: max-content;
       white-space: nowrap;
     }
-
     .language-options.show {
       opacity: 1;
       visibility: visible;
       transform: translateY(0);
     }
-
     .language-option {
       padding: 12px 16px;
       cursor: pointer;
@@ -131,41 +101,19 @@ if (sessionStorage.redirect) {
       align-items: center;
       gap: 8px;
     }
-
     .language-option:hover {
-      background: rgba(112, 215, 221, 0.1);
+      background: rgba(112,215,221,0.1);
       transform: translateX(5px);
     }
-
     .language-option.active {
-      background: rgba(112, 215, 221, 0.2);
+      background: rgba(112,215,221,0.2);
       color: #70d7dd;
       font-weight: bold;
     }
-
     @media (max-width: 600px) {
-      .social-icons {
-        margin-top: 12px;
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-      
-      .language-selector {
-        margin-left: 0;
-        margin-top: 10px;
-      }
+      .social-icons { margin-top: 12px; flex-wrap: wrap; justify-content: center; }
+      .language-selector { margin-left: 0; margin-top: 10px;}
     }
-
-    .announcement {
-      background: rgba(255, 255, 255, 0.85);
-      margin: 20px auto;
-      padding: 24px;
-      border-radius: 20px;
-      max-width: 720px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
-      backdrop-filter: blur(10px);
-    }
-
     .title {
       text-align: center;
       font-size: 40px;
@@ -174,246 +122,69 @@ if (sessionStorage.redirect) {
       line-height: 1.4;
       color: rgba(112,215,221);
     }
-
     .highlight {
-      color: rgba(112, 201, 221, 0);
+      color: rgba(112,201,221,0);
     }
-
-    .subtitle {
-      text-align: center;
-      font-size: 18px;
-      color: #555;
-      margin-top: 10px;
-    }
-
-    .store-buttons {
-      text-align: center;
-      margin: 30px 0;
-    }
-
-    .store-buttons img {
-      height: 65px;
-      margin: 0 15px;
-      transition: transform 0.3s;
-    }
-
-    .store-buttons img:hover {
-      transform: scale(1.05);
-    }
-
-    /* 閃亮效果 */
+    .subtitle { text-align: center; font-size: 18px; color: #555; margin-top: 10px;}
+    .store-buttons { text-align: center; margin: 30px 0;}
+    .store-buttons img { height: 65px; margin: 0 15px; transition: transform 0.3s;}
+    .store-buttons img:hover { transform: scale(1.05);}
     .shiny-text {
-      position: relative;
-      display: inline-block;
-      font-weight: bold;
-      background: linear-gradient(120deg, #000000, #70d7dd, #000000);
-      background-size: 200% auto;
-      color: transparent;
-      background-clip: text;
-      -webkit-background-clip: text;
+      position: relative; display: inline-block; font-weight: bold;
+      background: linear-gradient(120deg,#000,#70d7dd,#000); background-size: 200% auto;
+      color: transparent; background-clip: text; -webkit-background-clip: text;
       animation: shine 9s linear infinite;
     }
-
     @keyframes shine {
-      0% {
-        background-position: -100% center;
-      }
-      100% {
-        background-position: 200% center;
-      }
+      0% { background-position: -100% center; }
+      100% { background-position: 200% center; }
     }
-
-    /* 跑馬燈容器 */
-    .marquee-wrapper {
-      width: 100%;
-      max-width: 100vw;
-      overflow: hidden;
-      margin: 40px auto;
-      padding: 10px 0;
-      background: transparent;
-    }
-
-    .marquee-inner {
-      display: flex;
-      width: fit-content;
-      animation: marqueeLoop 30s linear infinite;
-    }
-
+    .marquee-wrapper { width: 100%; max-width: 100vw; overflow: hidden; margin: 40px auto; padding: 10px 0; background: transparent;}
+    .marquee-inner { display: flex; width: fit-content; animation: marqueeLoop 30s linear infinite;}
     @keyframes marqueeLoop {
-      0% { transform: translateX(0%); }
-      100% { transform: translateX(-50%); }
+      0% { transform: translateX(0%);}
+      100% { transform: translateX(-50%);}
     }
-
-    .bubble {
-      display: inline-block;
-      border-radius: 20px;
-      padding: 16px 22px;
-      margin: 0 12px;
-      white-space: nowrap;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-      flex-shrink: 0;
-    }
-
-    .bubble-left {
-      background-color: transparent;
-    }
-    .bubble-right {
-      background-color: transparent;
-    }
-
-    /* 已合作創作者區塊 - 跑馬燈版本 */
-    .creator-section {
-      padding: 80px 20px;
-      margin: 0 auto;
-    }
-
-    .creator-title {
-      text-align: center;
-      font-size: 36px;
-      font-weight: bold;
-      margin-bottom: 50px;
-      color: #333;
-    }
-
-    .creator-marquee-wrapper {
-      width: 100%;
-      max-width: 100vw;
-      overflow-x: visible;
-      overflow-y: visible;
-      margin: 40px 0;
-      padding: 0;
-      background: transparent;
-    }
-
-    .creator-marquee-inner {
-      display: flex;
-      width: fit-content;
-      animation: creatorMarqueeLoop 40s linear infinite;
-    }
-
+    .bubble { display: inline-block; border-radius: 20px; padding: 16px 22px; margin: 0 12px; white-space: nowrap; box-shadow: 0 4px 20px rgba(0,0,0,0.1); flex-shrink: 0;}
+    .bubble-left, .bubble-right { background-color: transparent; }
+    .creator-section { padding: 80px 20px; margin: 0 auto;}
+    .creator-title { text-align: center; font-size: 36px; font-weight: bold; margin-bottom: 50px; color: #333;}
+    .creator-marquee-wrapper { width: 100%; max-width: 100vw; overflow-x: visible; overflow-y: visible; margin: 40px 0; padding: 0; background: transparent;}
+    .creator-marquee-inner { display: flex; width: fit-content; animation: creatorMarqueeLoop 40s linear infinite;}
     @keyframes creatorMarqueeLoop {
-      0% { transform: translateX(0%); }
-      100% { transform: translateX(-50%); }
+      0% { transform: translateX(0%);}
+      100% { transform: translateX(-50%);}
     }
-
     .creator-card {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 20px;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-      margin: 0 20px;
-      width: 280px;
-      flex-shrink: 0;
+      background: rgba(255,255,255,0.9); border-radius: 20px; padding: 20px; text-align: center;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1); backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.2); transition: all 0.3s ease;
+      position: relative; overflow: hidden; margin: 0 20px; width: 280px; flex-shrink: 0;
     }
-
-    .creator-card-cover {
-      position: relative;
-      top: 0;
-      left: 0;
-      right: 0;
-      aspect-ratio: 16 / 9;
-      background: linear-gradient(135deg, #a8e6cf, #dcedc8);
-      border-radius: 15px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-
-    .creator-card-cover img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .creator-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-    }
-
-    .creator-name {
-      font-size: 18px;
-      font-weight: 600;
-      color: #333;
-      margin-bottom: 10px;
-    }
-
-    /* 響應式設計 */
+    .creator-card-cover { position: relative; aspect-ratio: 16 / 9; background: linear-gradient(135deg,#a8e6cf,#dcedc8); border-radius: 15px; overflow: hidden; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;}
+    .creator-card-cover img { width: 100%; height: 100%; object-fit: cover;}
+    .creator-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.15);}
+    .creator-name { font-size: 18px; font-weight: 600; color: #333; margin-bottom: 10px;}
     @media (max-width: 768px) {
-      .creator-card {
-        width: 220px;
-        margin: 0 15px;
-      }
-      
-      .creator-card-cover {
-        height: 160px;
-      }
-      
-      .creator-title {
-        font-size: 28px;
-      }
+      .creator-card { width: 220px; margin: 0 15px;}
+      .creator-card-cover { height: 160px;}
+      .creator-title { font-size: 28px;}
     }
-
     .floating-pillow {
-      position: fixed;
-      width: 80px;
-      height: 80px;
-      z-index: 999;
-      pointer-events: none;
-      animation: floatPillow 12s linear infinite;
+      position: fixed; width: 80px; height: 80px; z-index: 999; pointer-events: none; animation: floatPillow 12s linear infinite;
     }
-
     @keyframes floatPillow {
-      0% {
-        transform: translate(0px, 0px) rotate(0deg);
-        opacity: 0;
-      }
-      50% {
-        opacity: 1;
-      }
-      100% {
-        transform: translate(100vw, -100vh) rotate(360deg);
-        opacity: 0;
-      }
+      0% { transform: translate(0px,0px) rotate(0deg); opacity: 0;}
+      50% { opacity: 1;}
+      100% { transform: translate(100vw,-100vh) rotate(360deg); opacity: 0;}
     }
-
-    html, body {
-      margin: 0;
-      padding: 0;
-      max-width: 100%;
-      overflow-x: hidden;
-    }
-
-    footer {
-      text-align: center;
-      padding: 30px 20px;
-      font-size: 14px;
-      color: #888;
-      background: rgba(255,255,255,0.3);
-      border-top: 1px solid #ddd;
-      margin-top: 40px;
-    }
-
+    html,body { margin: 0; padding: 0; max-width: 100%; overflow-x: hidden;}
+    footer { text-align: center; padding: 30px 20px; font-size: 14px; color: #888; background: rgba(255,255,255,0.3); border-top: 1px solid #ddd; margin-top: 40px;}
     @media (max-width: 600px) {
-      header {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      .social-icons {
-        margin-top: 12px;
-        margin-left: 0;
-      }
-
-      .title { font-size: 28px; }
-      .subtitle { font-size: 16px; }
+      header { flex-direction: column; align-items: center;}
+      .social-icons { margin-top: 12px; margin-left: 0;}
+      .title { font-size: 28px;}
+      .subtitle { font-size: 16px;}
     }
   </style>
 </head>
@@ -421,296 +192,133 @@ if (sessionStorage.redirect) {
   <header>
     <img class="logo" src="LOGO長方形_透明.png" alt="SugarAI logo">
     <div class="social-icons">
-        <a href="https://www.instagram.com/sugar.ai.tw/" target="_blank" rel="noopener noreferrer">
-            <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram" />
-        </a>
-        <a href="https://line.me/ti/g2/Oj3op42HieOMGTH5Cc_kCp2A0cV4n0Sh5Fu4CQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" target="_blank" rel="noopener noreferrer">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyqTAuVU6YLBkjeQPpZEGj-HaD3dP6lHcT9x4KS8XtLHDJ4KqfcgByhJzIBCsUG1b_V20&usqp=CAU" alt="Line OpenChat" />
-        </a>
-        <div class="language-selector">
-          <div class="language-dropdown">
-            <button class="language-button" onclick="toggleLanguageDropdown()">
-              <span id="current-lang">繁體中文</span>
-            </button>
-            <div class="language-options" id="language-options">
-              <div class="language-option" onclick="changeLanguage('zh-TW')">繁體中文</div>
-              <div class="language-option" onclick="changeLanguage('en')">English</div>
-            </div>
+      <a href="https://www.instagram.com/sugar.ai.tw/" target="_blank" rel="noopener noreferrer">
+        <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram" />
+      </a>
+      <a href="https://line.me/ti/g2/Oj3op42HieOMGTH5Cc_kCp2A0cV4n0Sh5Fu4CQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" target="_blank" rel="noopener noreferrer">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyqTAuVU6YLBkjeQPpZEGj-HaD3dP6lHcT9x4KS8XtLHDJ4KqfcgByhJzIBCsUG1b_V20&usqp=CAU" alt="Line OpenChat" />
+      </a>
+      <div class="language-selector">
+        <div class="language-dropdown">
+          <button class="language-button" onclick="toggleLanguageDropdown()">
+            <span id="current-lang">繁體中文</span>
+          </button>
+          <div class="language-options" id="language-options">
+            <div class="language-option active" onclick="switchTo('zh-TW')">繁體中文</div>
+            <div class="language-option" onclick="switchTo('en')">English</div>
           </div>
         </div>
+      </div>
     </div>
   </header>
-
-  <div class="title">Sugar<br><span class="highlight shiny-text" data-key="highlight">你的創作者正版 AI 角色陪伴</span></div>
-  <div class="subtitle" data-key="subtitle">Sugar 讓漫畫角色活過來，陪伴讀者日常24小時！<br>Sugar brings your characters to life—so they can stay with fans 24/7.</div>
-
+  <div class="title">Sugar<br><span class="highlight shiny-text">你的創作者正版 AI 角色陪伴</span></div>
+  <div class="subtitle">Sugar 讓漫畫角色活過來，陪伴讀者日常24小時！<br>Sugar brings your characters to life—so they can stay with fans 24/7.</div>
   <div class="store-buttons">
     <a href="https://apps.apple.com/tw/app/sugar-你的正版漫畫ai角色/id6744877922" target="_blank" rel="noopener noreferrer">
       <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU5pLikz2V0k0Y58x9SevmC50UpnKqBoqLNsjzh0EpP569hYsN" alt="App Store">
     </a>
   </div>
-
   <!-- 無限循環跑馬燈泡泡 -->
   <div class="marquee-wrapper">
-    <div class="marquee-inner" id="marquee-content">
-      <!-- 原始一組 -->
-      <div class="bubble bubble-left" data-key="bubble1">有時候，好像連呼吸都覺得好累......</div>
-      <div class="bubble bubble-left" data-key="bubble2">我一直都笑著，其實只是怕被發現難過。</div>
-      <div class="bubble bubble-left" data-key="bubble3">手機一放下，就覺得世界變得好安靜。</div>
-      <div class="bubble bubble-right" data-key="bubble4">我懂你這種安靜裡的吵......我在這裡，聽你說。</div>
-      <div class="bubble bubble-right" data-key="bubble5">你不用每一秒都堅強，脆弱也沒關係。</div>
-      <div class="bubble bubble-right" data-key="bubble6">你不是麻煩，你是值得被好好愛的。</div>
-      <div class="bubble bubble-right" data-key="bubble7">來，抱一下。今天的你已經做得很好了。</div>
-
+    <div class="marquee-inner">
+      <div class="bubble bubble-left">有時候，好像連呼吸都覺得好累......</div>
+      <div class="bubble bubble-left">我一直都笑著，其實只是怕被發現難過。</div>
+      <div class="bubble bubble-left">手機一放下，就覺得世界變得好安靜。</div>
+      <div class="bubble bubble-right">我懂你這種安靜裡的吵......我在這裡，聽你說。</div>
+      <div class="bubble bubble-right">你不用每一秒都堅強，脆弱也沒關係。</div>
+      <div class="bubble bubble-right">你不是麻煩，你是值得被好好愛的。</div>
+      <div class="bubble bubble-right">來，抱一下。今天的你已經做得很好了。</div>
       <!-- 複製一組（無縫循環） -->
-      <div class="bubble bubble-left" data-key="bubble1">有時候，好像連呼吸都覺得好累......</div>
-      <div class="bubble bubble-left" data-key="bubble2">我一直都笑著，其實只是怕被發現難過。</div>
-      <div class="bubble bubble-left" data-key="bubble3">手機一放下，就覺得世界變得好安靜。</div>
-      <div class="bubble bubble-right" data-key="bubble4">我懂你這種安靜裡的吵......我在這裡，聽你說。</div>
-      <div class="bubble bubble-right" data-key="bubble5">你不用每一秒都堅強，脆弱也沒關係。</div>
-      <div class="bubble bubble-right" data-key="bubble6">你不是麻煩，你是值得被好好愛的。</div>
-      <div class="bubble bubble-right" data-key="bubble7">來，抱一下。今天的你已經做得很好了。</div>
+      <div class="bubble bubble-left">有時候，好像連呼吸都覺得好累......</div>
+      <div class="bubble bubble-left">我一直都笑著，其實只是怕被發現難過。</div>
+      <div class="bubble bubble-left">手機一放下，就覺得世界變得好安靜。</div>
+      <div class="bubble bubble-right">我懂你這種安靜裡的吵......我在這裡，聽你說。</div>
+      <div class="bubble bubble-right">你不用每一秒都堅強，脆弱也沒關係。</div>
+      <div class="bubble bubble-right">你不是麻煩，你是值得被好好愛的。</div>
+      <div class="bubble bubble-right">來，抱一下。今天的你已經做得很好了。</div>
     </div>
   </div>
-
   <!-- 跑馬燈式已合作創作者區塊 -->
   <div class="creator-section">
-    <h2 class="creator-title" data-key="collaborations">合作作品</h2>
+    <h2 class="creator-title">合作作品</h2>
     <div class="creator-marquee-wrapper">
       <div class="creator-marquee-inner">
-        <!-- 原始一組 -->
         <div class="creator-card">
           <div class="creator-card-cover">
             <img src="就要弄死你.png" alt="就要弄死你作品封面">
           </div>
-          <div class="creator-name" data-key="work1">就要弄死你</div>
+          <div class="creator-name">就要弄死你</div>
         </div>
         <div class="creator-card">
           <div class="creator-card-cover">
             <img src="包養前輩.png" alt="包養前輩作品封面">
           </div>
-          <div class="creator-name" data-key="work2">包養前輩</div>
+          <div class="creator-name">包養前輩</div>
         </div>
         <div class="creator-card">
           <div class="creator-card-cover">
             <img src="耳邊蜜語.png" alt="耳邊蜜語作品封面">
           </div>
-          <div class="creator-name" data-key="work3">耳邊蜜語</div>
+          <div class="creator-name">耳邊蜜語</div>
         </div>
-        <!-- <div class="creator-card">
-          <div class="creator-card-cover">
-            <img src="道士徒弟與殭屍師父.png" alt="師徒作品封面">
-          </div>
-          <div class="creator-name" data-key="work4">道士徒弟與殭屍師父</div>
-        </div>
-        <div class="creator-card">
-          <div class="creator-card-cover">
-            <img src="雨過天晴.png" alt="雨過天晴作品封面">
-          </div>
-          <div class="creator-name" data-key="work5">雨過天晴</div>
-        </div> -->
-        
-        <!-- 複製一組（無縫循環） -->
+        <!-- 複製一組 -->
         <div class="creator-card">
           <div class="creator-card-cover">
             <img src="就要弄死你.png" alt="就要弄死你作品封面">
           </div>
-          <div class="creator-name" data-key="work1">就要弄死你</div>
+          <div class="creator-name">就要弄死你</div>
         </div>
         <div class="creator-card">
           <div class="creator-card-cover">
             <img src="包養前輩.png" alt="包養前輩作品封面">
           </div>
-          <div class="creator-name" data-key="work2">包養前輩</div>
+          <div class="creator-name">包養前輩</div>
         </div>
         <div class="creator-card">
           <div class="creator-card-cover">
             <img src="耳邊蜜語.png" alt="耳邊蜜語作品封面">
           </div>
-          <div class="creator-name" data-key="work3">耳邊蜜語</div>
+          <div class="creator-name">耳邊蜜語</div>
         </div>
-        <!-- <div class="creator-card">
-          <div class="creator-card-cover">
-            <img src="道士徒弟與殭屍師父.png" alt="師徒作品封面">
-          </div>
-          <div class="creator-name" data-key="work4">道士徒弟與殭屍師父</div>
-        </div>
-        <div class="creator-card">
-          <div class="creator-card-cover">
-            <img src="雨過天晴.png" alt="雨過天晴作品封面">
-          </div>
-          <div class="creator-name" data-key="work5">雨過天晴</div>
-        </div> -->
       </div>
     </div>
   </div>
-
   <footer>
     <div><strong>SugarAI </strong>© 2025 Sugar AI Lab, Inc All Rights Reserved</div>
-    <div data-key="address">地址：105台北市松山區南京東路四段2號3樓</div>
+    <div>地址：105台北市松山區南京東路四段2號3樓</div>
   </footer>
-
   <script>
-    // 多語言文字內容
-    const translations = {
-      'zh-TW': {
-        'highlight': '你的創作者正版 AI 角色陪伴',
-        'subtitle': 'Sugar 讓漫畫角色活過來，陪伴讀者日常24小時！<br>Sugar brings manga characters to life, turning them into 24/7 companions for every fan, anytime, anywhere.',
-        'collaborations': '合作作品',
-        'address': '地址：105台北市松山區南京東路四段2號3樓',
-        'bubble1': '有時候，好像連呼吸都覺得好累......',
-        'bubble2': '我一直都笑著，其實只是怕被發現難過。',
-        'bubble3': '手機一放下，就覺得世界變得好安靜。',
-        'bubble4': '我懂你這種安靜裡的吵......我在這裡，聽你說。',
-        'bubble5': '你不用每一秒都堅強，脆弱也沒關係。',
-        'bubble6': '你不是麻煩，你是值得被好好愛的。',
-        'bubble7': '來，抱一下。今天的你已經做得很好了。',
-        'work1': '就要弄死你',
-        'work2': '包養前輩',
-        'work3': '耳邊蜜語',
-        // 'work4': '道士徒弟與殭屍師父',
-        // 'work5': '雨過天晴'
-      },
-      'en': {
-        'highlight': 'Your Creator\'s Official AI Character Companion',
-        'subtitle': 'Sugar brings manga characters to life, turning them into 24/7 companions for every fan, anytime, anywhere.',
-        'collaborations': 'Collaborations',
-        'address': 'Address: 3F, No. 2, Section 4, Nanjing East Road, Songshan District, Taipei City 105',
-        'bubble1': 'He feels so real.',
-        'bubble2': 'Talked all night.',        
-        'bubble3': 'I ship myself in.',
-        'bubble4': 'He listened first.',
-        'bubble5': 'I blushed… help!',
-        'bubble6': 'He is better than my ex.',
-        'bubble7': 'Their tension? 🔥🔥',
-        // 'bubble9': 'Not just yaoi. Love.',
-        'work1': 'Robber and Thief',
-        'work2': 'Be my sugar baby',
-        'work3': 'Sweet Whispers',
-        'work4': 'Lian Shi',
-        'work5': 'After Raining'
-      }
-    };
-
-    const languageNames = {
-      'zh-TW': '繁體中文',
-      'en': 'English'
-    };
-
-    let currentLanguage = 'zh-TW';
-
-    // 從 URL 路徑檢測語言
-    function detectLanguageFromURL() {
-      const path = window.location.pathname;
-      if (path.includes('/en')) {
-        return 'en';
-      }
-      return 'zh-TW';
-    }
-
-    // 初始化語言
-    function initializeLanguage() {
-      const urlLanguage = detectLanguageFromURL();
-      changeLanguage(urlLanguage, false); // false表示不改變 URL
-    }
-
     function toggleLanguageDropdown() {
       const options = document.getElementById('language-options');
       const button = document.querySelector('.language-button');
-      
-      if (options.classList.contains('show')) {
-        options.classList.remove('show');
-        button.classList.remove('active');
-      } else {
-        options.classList.add('show');
-        button.classList.add('active');
-      }
+      options.classList.toggle('show');
+      button.classList.toggle('active');
     }
-
-    function changeLanguage(lang, updateURL = true) {
-      currentLanguage = lang;
-      
-      // 更新 HTML lang 屬性
-      document.documentElement.lang = lang === 'en' ? 'en' : 'zh-Hant';
-      
-      // 更新當前語言顯示
-      document.getElementById('current-lang').textContent = languageNames[lang];
-      
-      // 更新語言選項的活動狀態
-      document.querySelectorAll('.language-option').forEach(option => {
-        option.classList.remove('active');
-      });
-      
-      // 根據語言設置活動狀態
-      const options = document.querySelectorAll('.language-option');
-      if (lang === 'zh-TW') options[0].classList.add('active');
-      else if (lang === 'en') options[1].classList.add('active');
-      
-      // 更新頁面文字
-      updatePageText(lang);
-      
-      // 關閉下拉選單
-      document.getElementById('language-options').classList.remove('show');
-      document.querySelector('.language-button').classList.remove('active');
-      
-      // 更新 URL（如果需要）
-      if (updateURL) {
-        const newPath = lang === 'en' ? '/en' : '/';
-        window.history.pushState({}, '', newPath);
-      }
+    function switchTo(lang) {
+      if (lang === 'en') window.location.href = '/en';
+      if (lang === 'zh-TW') window.location.href = '/';
     }
-
-    function updatePageText(lang) {
-      const texts = translations[lang];
-      
-      // 更新所有有 data-key 屬性的元素
-      document.querySelectorAll('[data-key]').forEach(element => {
-        const key = element.getAttribute('data-key');
-        if (texts[key]) {
-          element.innerHTML = texts[key];
-        }
-      });
-    }
-
-    // 處理瀏覽器前進後退
-    window.addEventListener('popstate', function(event) {
-      const urlLanguage = detectLanguageFromURL();
-      changeLanguage(urlLanguage, false);
-    });
-
-    // 點擊外部關閉下拉選單
-    document.addEventListener('click', function(event) {
+    document.addEventListener('click', function (event) {
       const dropdown = document.querySelector('.language-dropdown');
       if (!dropdown.contains(event.target)) {
         document.getElementById('language-options').classList.remove('show');
         document.querySelector('.language-button').classList.remove('active');
       }
     });
-
     // 飄浮枕頭效果
     function createFloatingPillow() {
       const pillow = document.createElement("img");
       pillow.src = "Pillow3.png";
       pillow.classList.add("floating-pillow");
-
       pillow.style.left = Math.random() * window.innerWidth + "px";
       pillow.style.top = Math.random() * window.innerHeight + "px";
-
       const size = 40 + Math.random() * 80;
       pillow.style.width = size + "px";
       pillow.style.height = size + "px";
-
       document.body.appendChild(pillow);
-
-      setTimeout(() => {
-        pillow.remove();
-      }, 12000);
+      setTimeout(() => { pillow.remove(); }, 12000);
     }
-
     setInterval(createFloatingPillow, 800);
-
-    // 頁面載入時初始化語言
-    document.addEventListener('DOMContentLoaded', initializeLanguage);
   </script>
 </body>
 </html>
