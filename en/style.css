@@ -27,6 +27,45 @@ header {
 .social-icons img:hover {
     transform: scale(1.1);
 }
+
+.social-icons a[href*="instagram.com"] {
+  margin-left: 32px;
+}
+
+.top-nav {
+  display: flex;
+  gap: 24px;
+  margin-left: 40px;
+}
+
+.top-nav a {
+  font-size: 16px;
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+/* Home 粗體藍色 */
+.top-nav a[href="#home"] {
+  color: #70d7dd;
+  font-weight: 800;
+  font-size: 20px;
+}
+
+.top-nav a:hover {
+  color: #70d7dd;
+}
+
+/* 小螢幕排版微調 */
+@media (max-width: 768px) {
+  .top-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 10px 0;
+  }
+}
+
 /* 語言選擇器樣式 */
 .language-selector { position: relative; margin-left: 20px; }
 .language-dropdown { position: relative; display: inline-block; }
@@ -109,7 +148,7 @@ header {
     text-align: center;
     font-size: 35px;
     font-weight: bold;
-    margin-top: 40px;
+    margin-top: 70px;
     line-height: 1.4;
     color: rgba(112,215,221);
 }
@@ -402,14 +441,13 @@ header {
 }
 
 /* 泡泡位置（依實際微調） */
-.bubble-webtoon { top: 30px; left: -100px; animation-delay: 0s; }
-.bubble-itri { top: 120px; left: -160px; animation-delay: 1s; }
-.bubble-nasa { top: 210px; left: -80px; animation-delay: 2s; }
-.bubble-twitch { top: 290px; left: -184px; animation-delay: 3s; width: 150px; /* 原本大多是 60px */
-  height: auto;}
-.bubble-line { top: 100px; left: -280px; animation-delay: 4s; }
-.bubble-google { top: 248px; left: -248px; animation-delay: 5s; }
-.bubble-guitar { top: 385px; left: -210px; animation-delay: 6s; }
+.bubble-webtoon { top: -18px; left: -265px; animation-delay: 0s; width: 133px; height: auto;}
+.bubble-itri { top: 64px; left: -97px; animation-delay: 1s; width: 100px; height: auto;}
+.bubble-nasa { top: 210px; left: -80px; animation-delay: 2s; width: 150px; height: auto;}
+.bubble-twitch { top: 343px; left: -184px; animation-delay: 3s; width: 200px; height: auto;}
+.bubble-line { top: 91px; left: -385px; animation-delay: 4s; width: 100px; height: auto;}
+.bubble-google { top: 248px; left: -278px; animation-delay: 5s; width: 100px; height: auto;}
+.bubble-guitar { top: 385px; left: -365px; animation-delay: 6s; width: 117px; height: auto;}
 
 /* 飄浮動畫 */
 @keyframes float {
@@ -495,7 +533,7 @@ header {
   font-weight: 800;
   color: #7ae4e7;
   margin-top: 0px;
-  margin-bottom: -40px;
+  margin-bottom: 40px;
   text-align: center;
   z-index: 2;
   position: relative;
@@ -554,8 +592,8 @@ header {
 
 .author-icon {
   position: absolute;
-  bottom: 0px;     /* 貼近底部，向下超出一點 */
-  left: 0px;        /* 貼左側 */
+  bottom: 0px;     
+  left: 0px;        
   width: 90px;
   height: 90px;
   border-radius: 50%;

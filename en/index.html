@@ -8,18 +8,34 @@
   <title>SugarAI</title>
   <link rel="icon" href="sugar.ico" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
 </head>
 <body>
   <header>
     <img class="logo" src="img\LOGO長方形_透明.png" alt="SugarAI logo">
     <div class="social-icons">
+      <!-- Nav 區塊 -->
+      <nav class="top-nav">
+        <a href="#home">Home</a>
+        <a href="#meet-sugar">Meet Sugar</a>
+        <a href="#about-us">About Us</a>
+        <a href="#vm">Vision & Mission</a>
+        <a href="#creators">For Creators</a>
+        <a href="#testimonial">Partner Words</a>
+        <a href="#faq">FAQ</a>
+      </nav>
       <a href="https://www.instagram.com/sugar.ai.tw/" target="_blank" rel="noopener noreferrer">
         <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram" />
       </a>
-      <a href="https://line.me/ti/g2/Oj3op42HieOMGTH5Cc_kCp2A0cV4n0Sh5Fu4CQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" target="_blank" rel="noopener noreferrer">
+
+      <!-- <a href="https://line.me/ti/g2/Oj3op42HieOMGTH5Cc_kCp2A0cV4n0Sh5Fu4CQ?utm_source=invitation&utm_medium=link_copy&utm_campaign=default" target="_blank" rel="noopener noreferrer">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyqTAuVU6YLBkjeQPpZEGj-HaD3dP6lHcT9x4KS8XtLHDJ4KqfcgByhJzIBCsUG1b_V20&usqp=CAU" alt="Line OpenChat" />
-      </a>
-      <div class="language-selector">
+      </a> -->
+      <div class="language-selector" id="home">
         <div class="language-dropdown">
           <button class="language-button" onclick="toggleLanguageDropdown()">
             <span id="current-lang">English</span>
@@ -32,7 +48,7 @@
       </div>
     </div>
   </header>
-  <div class="title">
+  <div class="title" >
     <span class="title-main">SUGAR</span>
     <span class="highlight shiny-text">Your Creator's Official AI Character Companion</span>
   </div>
@@ -91,7 +107,7 @@
   
   <!-- Meet Sugar 區塊 -->
   <div class="meet-sugar-box scroll-fade-in-left">
-    <h2 class="meet-sugar-heading">Meet Sugar</h2>
+    <h2 class="meet-sugar-heading" id="meet-sugar">Meet Sugar</h2>
     <p>
       Sugar believes characters deserve to grow, evolve, and keep connecting with fans long after the last panel or episode.
       That′s why we work hand-in-hand with manga, webtoon, and story creators to turn their original characters into interactive experiences.
@@ -118,7 +134,7 @@
     <img class="logo-bubble bubble-guitar" src="img/Guitar_hero.png" alt="Guitar Hero Logo" />
 
     <!-- 文字區 -->
-    <h2 class="about-us-heading">About Us</h2>
+    <h2 class="about-us-heading" id=about-us>About Us</h2>
     <div class="about-us-content">
       <div class="about-us-text">
         <p>Sugar AI is backed by the co-founder of Twitch, Kevin Lin, and Kai Huang (Co-founder of Guitar Hero), with official collaboration from LINE WEBTOON.</p>
@@ -133,7 +149,7 @@
   </div>
 
     <!--Vision & Mission 區塊 -->
-<div class="vm-section">
+<div class="vm-section" id="vm">
   <div class="vm-wrapper">
     <div class="vm-box">
       <div class="vm-heading">Vision</div>
@@ -157,8 +173,8 @@
 
 
   <!--For Creators 區塊 -->
-  <div class="meet-sugar-box scroll-fade-in-left">
-    <h2 class="meet-sugar-heading">For Creators</h2>
+  <div class="meet-sugar-box scroll-fade-in-left" >
+    <h2 class="meet-sugar-heading" id="creators">For Creators</h2>
     <p>
       Bring your characters to life. On your terms.
       Create unforgettable AI experiences while staying in full control of your IP, fan engagement, and monetization.
@@ -172,7 +188,7 @@
 
 
   <!-- Hear From Our Partner 區塊 -->
-  <h2 class="testimonial-title">Hear From Our Partner</h2>
+  <h2 class="testimonial-title" id="testimonial">Hear From Our Partner</h2>
 
     <div class="testimonial-wrapper">
       <div class="testimonial-card">
@@ -221,7 +237,7 @@
   </div>
 
   <!--FAQ 區塊 -->
-  <h2 class="faq-main-title">FAQ For Creators</h2>
+  <h2 class="faq-main-title" id="faq">FAQ For Creators</h2>
   <div class="faq-container">
     <div class="faq-item">
       <button class="faq-question" aria-expanded="false">Who owns the character?</button>
