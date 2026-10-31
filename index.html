@@ -227,6 +227,11 @@ dialog.party[open]{display:flex; flex-direction:column}
 }
 .party-bar a:hover, .party-bar button:hover{background:rgba(255,255,255,.16)}
 .party iframe{flex:1; width:100%; border:0; background:#0c0f1d}
+.party-missing{flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; text-align:center; padding:24px; background:#0c0f1d}
+.party-missing[hidden], .party iframe[hidden]{display:none}
+.party-missing canvas{width:72px; height:84px; image-rendering:pixelated; animation:hop .8s cubic-bezier(.3,.7,.4,1) infinite; transform-origin:50% 100%}
+.party-missing p{margin:0; font-size:16px; color:#e6eaff}
+.party-missing a{color:#ffb3d6; font-size:14px}
 .party-note{margin:0; padding:8px 18px 12px; font-size:12.5px; color:#9aa6cf}
 .party-note a{color:#ffb3d6}
 
@@ -483,7 +488,12 @@ dialog.party[open]{display:flex; flex-direction:column}
     <a href="https://valentinaa0214.github.io/rabbitDancing/" target="_blank" rel="noopener"><span class="en">Open in new tab</span><span class="zh">在新分頁開啟</span></a>
     <button type="button" id="partyClose"><span class="en">Close</span><span class="zh">關閉</span></button>
   </div>
-  <iframe id="partyFrame" title="Dancing rabbit" allow="autoplay" loading="lazy"></iframe>
+  <iframe id="partyFrame" title="Dancing rabbit" allow="autoplay"></iframe>
+  <div class="party-missing" id="partyMissing" hidden>
+    <canvas class="bunny-sprite" width="12" height="14"></canvas>
+    <p><span class="en">The bunny is still getting ready for the party. Check back soon!</span><span class="zh">兔子還在準備派對,晚點再來看看!</span></p>
+    <a href="https://github.com/Valentinaa0214/rabbitDancing" target="_blank" rel="noopener"><span class="en">Peek at the source on GitHub</span><span class="zh">先到 GitHub 偷看原始碼</span></a>
+  </div>
   <p class="party-note"><span class="en">Plain HTML + Web Audio, no build step. <a href="https://github.com/Valentinaa0214/rabbitDancing" target="_blank" rel="noopener">View the source on GitHub</a></span><span class="zh">純 HTML + Web Audio,不需 build。<a href="https://github.com/Valentinaa0214/rabbitDancing" target="_blank" rel="noopener">到 GitHub 看原始碼</a></span></p>
 </dialog>
 
@@ -553,10 +563,18 @@ dialog.party[open]{display:flex; flex-direction:column}
     toastTimer = setTimeout(() => toast.classList.remove('show'), 12000);
     runner.addEventListener('animationend', () => runner.classList.remove('run'), { once: true });
   }
+  const partyMissing = $('#partyMissing');
   function openParty() {
     toast.classList.remove('show');
-    if (!frame.src) frame.src = PARTY_URL;
-    if (typeof party.showModal === 'function') party.showModal(); else window.open(PARTY_URL, '_blank', 'noopener');
+    if (typeof party.showModal !== 'function') { window.open(PARTY_URL, '_blank', 'noopener'); return; }
+    partyMissing.hidden = true; frame.hidden = false;
+    party.showModal();
+    // On github.io the party page is same-origin, so we can check it exists before embedding it.
+    // Anywhere else the check fails (CORS / file://) and we simply try to embed it.
+    const embed = () => { if (party.open && !frame.src) frame.src = PARTY_URL; };
+    fetch(PARTY_URL, { method: 'HEAD', cache: 'no-store' })
+      .then((r) => { if (r.ok) embed(); else { frame.hidden = true; partyMissing.hidden = false; } })
+      .catch(embed);
   }
   $('#toastGo').addEventListener('click', openParty);
   $('#toastNo').addEventListener('click', () => toast.classList.remove('show'));
