@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en" data-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LanZhen Huang · R&amp;D Intern @ Trend AI</title>
+<meta name="description" content="LanZhen Huang (黃蘭榛) — M.S. Information Management at National Taiwan University. R&D intern at Trend AI, Cybersecurity &amp; Cloud Engineering.">
+<meta property="og:title" content="LanZhen Huang · R&D Intern @ Trend AI">
+<meta property="og:description" content="M.S. Information Management @ NTU. Vulnerability scanning, cloud engineering and applied machine learning.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#26428b">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2326428b'/%3E%3Ctext x='32' y='42' font-family='Arial' font-size='28' font-weight='700' fill='white' text-anchor='middle'%3ELH%3C/text%3E%3C/svg%3E">
+
+<style>
+:root{
+  --accent:#26428b; --accent-2:#3d63c9; --accent-ink:#1b2f66;
+  --ink:#10172b; --muted:#566077; --line:#e1e6f0; --bg:#f6f8fc; --card:#ffffff;
+  --radius:18px; --wrap:1080px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth; scroll-padding-top:80px}
+html,body{overflow-x:clip}
+body{
+  margin:0; color:var(--ink); background:var(--bg); line-height:1.65;
+  font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI","Helvetica Neue","PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+a{color:var(--accent); text-underline-offset:3px}
+.wrap{max-width:var(--wrap); margin:0 auto; padding:0 24px}
+
+/* language toggle: show only the active language */
+html[data-lang="en"] .zh{display:none!important}
+html[data-lang="zh"] .en{display:none!important}
+
+/* ---------- top bar ---------- */
+.topbar{
+  position:sticky; top:0; z-index:50; height:64px;
+  background:rgba(246,248,252,.82); backdrop-filter:saturate(1.4) blur(12px);
+  -webkit-backdrop-filter:saturate(1.4) blur(12px); border-bottom:1px solid transparent;
+  transition:border-color .25s;
+}
+.topbar.scrolled{border-bottom-color:var(--line)}
+.topbar .wrap{height:100%; display:flex; align-items:center; justify-content:space-between; gap:16px}
+.brand{font-weight:700; letter-spacing:-.01em; color:var(--ink); text-decoration:none; display:flex; align-items:center; gap:10px}
+.brand i{
+  width:30px; height:30px; border-radius:9px; background:var(--accent); color:#fff; font-style:normal;
+  display:grid; place-items:center; font-size:13px; letter-spacing:0;
+}
+.nav{display:flex; align-items:center; gap:4px}
+.nav a{
+  color:var(--muted); text-decoration:none; font-size:14.5px; font-weight:500; padding:8px 12px; border-radius:10px;
+  transition:color .15s, background .15s;
+}
+.nav a:hover{color:var(--ink); background:rgba(38,66,139,.07)}
+.lang{
+  margin-left:6px; font:inherit; font-size:13.5px; font-weight:600; color:var(--accent); cursor:pointer;
+  background:#fff; border:1px solid var(--line); border-radius:999px; padding:6px 14px; transition:border-color .15s, transform .15s;
+}
+.lang:hover{border-color:var(--accent)}
+@media (max-width:760px){ .nav a{display:none} }
+
+/* ---------- hero ---------- */
+.hero{padding:44px 0 72px; overflow-x:clip}
+.hero-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:56px; align-items:center}
+.eyebrow{
+  margin:0 0 14px; font-size:13px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--accent);
+}
+h1{margin:0; font-size:clamp(2.5rem,5.4vw,3.9rem); line-height:1.05; letter-spacing:-.03em}
+h1 .cn{
+  display:block; margin-top:10px; font-size:clamp(1.05rem,2vw,1.3rem); font-weight:500; letter-spacing:.18em; color:var(--muted);
+}
+.lead{margin:22px 0 0; font-size:1.12rem; color:#2c3550; max-width:34em}
+.cta{display:flex; flex-wrap:wrap; gap:10px; margin-top:28px}
+.btn{
+  display:inline-flex; align-items:center; gap:9px; padding:11px 18px; border-radius:999px;
+  border:1px solid var(--line); background:#fff; color:var(--ink); font-weight:600; font-size:15px; text-decoration:none;
+  transition:transform .15s, box-shadow .15s, border-color .15s;
+}
+.btn:hover{transform:translateY(-2px); box-shadow:0 8px 20px -10px rgba(16,23,43,.35); border-color:#c9d2e6}
+.btn.primary{background:var(--accent); border-color:var(--accent); color:#fff}
+.btn.primary:hover{box-shadow:0 10px 24px -10px rgba(38,66,139,.7)}
+.btn svg{width:17px; height:17px; flex:none}
+.facts{display:flex; flex-wrap:wrap; gap:8px 22px; list-style:none; padding:0; margin:30px 0 0; color:var(--muted); font-size:14.5px}
+.facts li{display:flex; align-items:center; gap:8px}
+.facts li::before{content:""; width:6px; height:6px; border-radius:50%; background:var(--accent-2)}
+
+/* portrait stage */
+.portrait-col{display:flex; flex-direction:column; align-items:center}
+.stage{
+  position:relative; width:min(100%,380px); aspect-ratio:900/1110; touch-action:none; cursor:grab;
+  user-select:none; -webkit-user-select:none; outline:none; -webkit-tap-highlight-color:transparent;
+}
+.stage.is-grabbing{cursor:grabbing}
+.stage:focus-visible{outline:2px solid var(--accent-2); outline-offset:10px; border-radius:28px}
+.card-bg{
+  position:absolute; inset:24% 0 0 0; border-radius:30px; overflow:hidden;
+  background:linear-gradient(158deg,var(--accent-2) 0%,var(--accent) 52%,var(--accent-ink) 100%);
+  box-shadow:0 30px 60px -30px rgba(27,47,102,.75);
+}
+.card-bg::before{
+  content:""; position:absolute; inset:0; opacity:.5;
+  background-image:radial-gradient(rgba(255,255,255,.28) 1.2px, transparent 1.4px); background-size:18px 18px;
+  -webkit-mask-image:linear-gradient(180deg,#000,transparent 85%); mask-image:linear-gradient(180deg,#000,transparent 85%);
+}
+.card-bg::after{
+  content:""; position:absolute; width:70%; aspect-ratio:1; right:-22%; top:-22%; border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.22),transparent 66%);
+}
+.stage img.fallback{position:absolute; inset:0; width:100%; height:100%; object-fit:contain; z-index:1; pointer-events:none; -webkit-user-drag:none}
+.stage canvas{position:absolute; z-index:2; pointer-events:none}
+.stage.gl img.fallback{visibility:hidden}
+.hint{
+  margin:22px 0 0; display:flex; align-items:center; gap:10px; font-size:13.5px; color:var(--muted);
+  background:#fff; border:1px solid var(--line); border-radius:999px; padding:7px 14px 7px 10px; transition:opacity .4s;
+}
+.hint svg{width:18px; height:18px; color:var(--accent); animation:nudge 2.4s ease-in-out infinite}
+.hint.done{opacity:.0; pointer-events:none}
+@keyframes nudge{0%,100%{transform:translate(0,0)}40%{transform:translate(-5px,-4px) rotate(-8deg)}60%{transform:translate(2px,2px)}}
+
+@media (max-width:860px){
+  .hero{padding-top:20px}
+  .hero-grid{grid-template-columns:1fr; gap:34px}
+  .portrait-col{order:-1}
+  .stage{width:min(72%,320px)}
+}
+
+/* ---------- sections ---------- */
+section{padding:72px 0 8px}
+.sec-head{display:flex; align-items:baseline; gap:14px; margin-bottom:28px}
+.sec-head .num{font-size:13px; font-weight:700; color:var(--accent-2); letter-spacing:.1em}
+h2{margin:0; font-size:clamp(1.6rem,3vw,2rem); letter-spacing:-.02em}
+.about p{margin:0 0 16px; font-size:1.06rem; color:#2c3550; max-width:46em}
+
+.job{
+  display:grid; grid-template-columns:170px 1fr; gap:10px 32px; padding:26px 0; border-top:1px solid var(--line);
+}
+.job:first-of-type{border-top:0}
+.job-meta{color:var(--muted); font-size:14px; line-height:1.5}
+.job-meta .dates{display:block; font-weight:600; color:var(--ink)}
+.badge{
+  display:inline-block; margin-top:8px; font-size:11.5px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--accent); background:rgba(38,66,139,.09); padding:3px 9px; border-radius:999px;
+}
+.job h3{margin:0; font-size:1.2rem; letter-spacing:-.01em}
+.job .org{margin:2px 0 12px; color:var(--accent); font-weight:600}
+.job ul, .proj ul{margin:0; padding-left:1.1em; color:#2c3550}
+.job li, .proj li{margin:0 0 7px; padding-left:2px}
+.job li::marker, .proj li::marker{color:var(--accent-2)}
+.job.featured{
+  background:linear-gradient(180deg,#fff,#fafbff); border:1px solid var(--line); border-radius:var(--radius);
+  padding:28px; margin:0 -28px 10px; box-shadow:0 18px 40px -28px rgba(27,47,102,.45);
+}
+@media (max-width:760px){
+  .job{grid-template-columns:1fr; gap:6px}
+  .job.featured{margin:0 -12px 10px; padding:22px 18px}
+}
+
+.proj{
+  background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:28px;
+}
+.proj h3{margin:0 0 4px; font-size:1.2rem}
+.proj .meta{margin:0 0 14px; color:var(--muted); font-size:14px}
+.chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:16px}
+.chip{
+  font-size:13.5px; font-weight:500; color:#26335a; background:#eef2fb; border:1px solid #dfe6f6;
+  padding:5px 12px; border-radius:999px;
+}
+
+.grid2{display:grid; grid-template-columns:repeat(2,1fr); gap:18px}
+.card{background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:24px}
+.card h3{margin:0 0 12px; font-size:1.02rem; letter-spacing:-.005em}
+.card .chips{margin-top:0}
+.card p{margin:0; color:#2c3550}
+.edu{display:grid; gap:16px}
+.edu h3{margin:0; font-size:1.06rem}
+.edu .sub{margin:2px 0 0; color:var(--muted); font-size:14.5px}
+.edu .when{font-size:13.5px; color:var(--accent); font-weight:600; margin:0 0 4px}
+.awards{list-style:none; margin:0; padding:0; display:grid; gap:10px}
+.awards li{display:flex; gap:12px; align-items:baseline}
+.awards time{flex:none; min-width:42px; font-weight:700; color:var(--accent); font-size:14px}
+@media (max-width:760px){ .grid2{grid-template-columns:1fr} }
+
+/* ---------- footer ---------- */
+footer{margin-top:72px; padding:30px 0 40px; border-top:1px solid var(--line); color:var(--muted); font-size:14px}
+footer .wrap{display:flex; flex-wrap:wrap; gap:12px 24px; align-items:center; justify-content:space-between}
+.sneak{display:inline-flex; align-items:center; gap:10px}
+.sneak button{
+  all:unset; cursor:pointer; line-height:0; padding:4px; border-radius:8px; transition:transform .15s;
+}
+.sneak button:hover{transform:translateY(-3px) rotate(-4deg)}
+.sneak button:focus-visible{outline:2px solid var(--accent-2)}
+.sneak canvas{width:26px; height:30px; image-rendering:pixelated; opacity:.9}
+
+/* ---------- bunny easter egg ---------- */
+.toast{
+  position:fixed; left:50%; bottom:28px; z-index:90; transform:translate(-50%,30px); opacity:0; pointer-events:none;
+  display:flex; align-items:center; gap:14px; flex-wrap:wrap; justify-content:center; max-width:min(92vw,660px);
+  background:var(--ink); color:#fff; padding:14px 18px; border-radius:16px; font-size:14.5px;
+  box-shadow:0 20px 50px -20px rgba(0,0,0,.6); transition:transform .35s cubic-bezier(.2,.9,.3,1.2), opacity .25s;
+}
+.toast.show{transform:translate(-50%,0); opacity:1; pointer-events:auto}
+.toast-actions{display:flex; gap:8px}
+.toast button{
+  font:inherit; font-size:13.5px; font-weight:600; border-radius:999px; padding:7px 14px; cursor:pointer; border:1px solid rgba(255,255,255,.28);
+  background:transparent; color:#fff;
+}
+.toast button.go{background:#ff8fc0; border-color:#ff8fc0; color:#3a0f26}
+.runner{
+  position:fixed; bottom:0; left:-90px; z-index:80; pointer-events:none; display:none;
+}
+.runner.run{display:block; animation:cross 5.6s linear forwards}
+.runner canvas{width:72px; height:84px; image-rendering:pixelated; animation:hop .46s cubic-bezier(.3,.7,.4,1) infinite; transform-origin:50% 100%; display:block}
+@keyframes cross{from{left:-90px}to{left:calc(100vw + 20px)}}
+@keyframes hop{0%,100%{transform:translateY(0) scale(1.08,.9)}45%{transform:translateY(-54px) scale(.94,1.08)}}
+
+dialog.party{
+  width:min(940px,94vw); height:min(660px,84vh); padding:0; border:0; border-radius:18px; overflow:hidden;
+  background:#14182a; color:#fff; box-shadow:0 40px 90px -30px rgba(0,0,0,.7);
+}
+dialog.party::backdrop{background:rgba(10,14,28,.62); backdrop-filter:blur(3px)}
+dialog.party[open]{display:flex; flex-direction:column}
+.party-bar{display:flex; align-items:center; gap:10px; padding:10px 14px 10px 18px; border-bottom:1px solid rgba(255,255,255,.1); font-size:14px}
+.party-bar strong{margin-right:auto}
+.party-bar a, .party-bar button{
+  font:inherit; font-size:13px; color:#cfd8f5; text-decoration:none; background:rgba(255,255,255,.08);
+  border:0; border-radius:999px; padding:6px 12px; cursor:pointer;
+}
+.party-bar a:hover, .party-bar button:hover{background:rgba(255,255,255,.16)}
+.party iframe{flex:1; width:100%; border:0; background:#0c0f1d}
+.party-note{margin:0; padding:8px 18px 12px; font-size:12.5px; color:#9aa6cf}
+.party-note a{color:#ffb3d6}
+
+/* ---------- reveal on scroll ---------- */
+.reveal{opacity:0; transform:translateY(14px); transition:opacity .6s ease, transform .6s ease}
+.reveal.in{opacity:1; transform:none}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal{opacity:1; transform:none; transition:none}
+  .hint svg{animation:none}
+  .runner.run{animation-duration:0.01s}
+  .runner canvas{animation:none}
+}
+</style>
+<noscript><style>.reveal{opacity:1!important; transform:none!important}</style></noscript>
+</head>
+
+<body>
+<div class="topbar" id="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="LanZhen Huang"><i>LH</i><span>LanZhen Huang</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#about"><span class="en">About</span><span class="zh">關於我</span></a>
+      <a href="#experience"><span class="en">Experience</span><span class="zh">經歷</span></a>
+      <a href="#projects"><span class="en">Projects</span><span class="zh">專案</span></a>
+      <a href="#skills"><span class="en">Skills</span><span class="zh">技能</span></a>
+      <a href="#contact"><span class="en">Contact</span><span class="zh">聯絡</span></a>
+      <button class="lang" id="langBtn" type="button" aria-label="Switch language">中文</button>
+    </nav>
+  </div>
+</div>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">
+        <span class="en">R&amp;D Intern · Cybersecurity &amp; Cloud Engineering</span>
+        <span class="zh">研發實習生 · 資安與雲端工程</span>
+      </p>
+      <h1>LanZhen Huang<span class="cn">黃蘭榛</span></h1>
+      <p class="lead">
+        <span class="en">Master's student in Information Management at National Taiwan University. At Trend AI, I work on vulnerability scanning for Linux hosts and network devices — from test environments to CVE validation.</span>
+        <span class="zh">國立臺灣大學資訊管理學系碩士生。目前在 Trend AI 參與 Linux 主機與網路設備的弱點掃描,從測試環境建置到 CVE 比對驗證。</span>
+      </p>
+      <div class="cta">
+        <a class="btn primary" href="mailto:kelly920214@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          <span>Email</span>
+        </a>
+        <a class="btn" href="https://www.linkedin.com/in/valentina0214" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9.75h4v11.5H3zM9.75 9.75h3.83v1.57h.06c.53-1 1.84-2.07 3.79-2.07 4.05 0 4.8 2.67 4.8 6.13v5.87h-4v-5.2c0-1.24-.02-2.84-1.73-2.84-1.73 0-2 1.35-2 2.75v5.29h-4z"/></svg>
+          <span>LinkedIn</span>
+        </a>
+        <a class="btn" href="https://github.com/Valentinaa0214" target="_blank" rel="noopener">
+          <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+          <span>GitHub</span>
+        </a>
+      </div>
+      <ul class="facts">
+        <li><span class="en">Trend AI</span><span class="zh">Trend AI 實習中</span></li>
+        <li><span class="en">M.S. IM, National Taiwan University</span><span class="zh">臺大資管所碩士生</span></li>
+        <li><span class="en">Taipei, Taiwan</span><span class="zh">台北</span></li>
+      </ul>
+    </div>
+
+    <div class="portrait-col">
+      <div class="stage" id="stage" tabindex="0" role="img"
+           aria-label="Portrait of LanZhen Huang. Drag to stretch it like jelly; press Enter to poke.">
+        <div class="card-bg"></div>
+        <img class="fallback" id="portraitImg" src="assets/portrait.webp" alt="LanZhen Huang" width="900" height="1110" decoding="async" draggable="false">
+        <canvas id="portraitGL" aria-hidden="true"></canvas>
+      </div>
+      <p class="hint" id="hint">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11V5a1.5 1.5 0 013 0v5m0-1.5a1.5 1.5 0 013 0V11m0-1a1.5 1.5 0 013 0v4.5a6 6 0 01-6 6h-1.2a6 6 0 01-4.6-2.2L4.4 14.6a1.6 1.6 0 012.4-2L9 15"/></svg>
+        <span class="en">Psst — try pulling me.</span><span class="zh">噓——試著拉我一下。</span>
+      </p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="about" class="about reveal">
+    <div class="sec-head"><span class="num">01</span><h2><span class="en">About</span><span class="zh">關於我</span></h2></div>
+    <p class="en">I'm a master's student in Information Management at National Taiwan University, and currently an R&amp;D intern at Trend AI in the Cybersecurity &amp; Cloud Engineering team.</p>
+    <p class="zh">我是國立臺灣大學資訊管理學系碩士生,目前在 Trend AI 的 Cybersecurity &amp; Cloud Engineering 部門擔任研發實習生。</p>
+    <p class="en">At Trend AI I work on vulnerability scanning for Linux hosts and network devices: building VM and container test environments, writing YAML scan rules, and validating scanner output against downstream CVE data.</p>
+    <p class="zh">在 Trend AI,我參與 Linux 主機與網路設備的弱點掃描:從架設 VM 與 Container 測試環境、撰寫 YAML 掃描規則,到將掃描輸出與下游 CVE 資料比對驗證。</p>
+    <p class="en">Before that, I interned as a software engineer and product manager at Sugar.ai (Flutter, web, API integration) and collaborated with BIG DATA Co., Ltd. on AI-generated text detection. I'm interested in cybersecurity, cloud engineering and applied machine learning.</p>
+    <p class="zh">在此之前,我曾在 Sugar.ai 擔任軟體工程暨產品經理實習生(Flutter、網頁、API 串接),並與 BIG DATA Co., Ltd. 合作 AI 生成文本偵測研究。我對資安、雲端工程與應用機器學習有興趣。</p>
+  </section>
+
+  <section id="experience" class="reveal">
+    <div class="sec-head"><span class="num">02</span><h2><span class="en">Experience</span><span class="zh">經歷</span></h2></div>
+
+    <article class="job featured">
+      <div class="job-meta">
+        <span class="dates"><span class="en">Present</span><span class="zh">目前</span></span>
+        <span>Taipei, Taiwan</span><br>
+        <span class="badge"><span class="en">Current</span><span class="zh">進行中</span></span>
+      </div>
+      <div class="job-body">
+        <h3><span class="en">R&amp;D Intern</span><span class="zh">研發實習生</span></h3>
+        <p class="org">Trend AI · Cybersecurity &amp; Cloud Engineering</p>
+        <ul>
+          <li class="en">Contribute to vulnerability scanning for Linux hosts and network devices in an enterprise network scanner, covering the workflow from test-environment setup to result verification.</li>
+          <li class="zh">參與企業級網路掃描器中 Linux 主機與網路設備的弱點掃描,負責從測試環境建置到結果驗證的完整流程。</li>
+          <li class="en">Provision self-hosted VMs and containers to emulate target systems (SUSE, AlmaLinux, network devices) for repeatable scan testing.</li>
+          <li class="zh">自行架設 VM 與 Container 模擬目標系統(SUSE、AlmaLinux、網路設備),建立可重複執行的掃描測試環境。</li>
+          <li class="en">Author YAML scan rules and test definitions for authenticated scans — SUSE first, then AlmaLinux with the same design.</li>
+          <li class="zh">撰寫 YAML 掃描規則與測試檔進行 authenticated scan;先完成 SUSE,再以同一套設計延伸到 AlmaLinux。</li>
+          <li class="en">Parse scanner output in Protocol Buffers (protobuf) and cross-check detected package versions against downstream CVE data to validate accuracy and catch false positives and negatives.</li>
+          <li class="zh">解析 protobuf 格式的掃描輸出,並將偵測到的套件版本與下游 CVE 資料比對,驗證準確度並找出誤報與漏報。</li>
+          <li class="en">Design and run test cases to verify rule correctness.</li>
+          <li class="zh">設計並執行測試案例,確認規則正確性。</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job">
+      <div class="job-meta">
+        <span class="dates"><span class="en">Jun – Aug 2025</span><span class="zh">2025 年 6–8 月</span></span>
+        <span>Taiwan</span>
+      </div>
+      <div class="job-body">
+        <h3><span class="en">Software Engineer &amp; Product Manager Intern</span><span class="zh">軟體工程暨產品經理實習生</span></h3>
+        <p class="org">Sugar.ai · Startup</p>
+        <ul>
+          <li class="en">Built core mobile app interfaces with Flutter and optimized widget structure and rendering to improve interaction performance.</li>
+          <li class="zh">以 Flutter 建置 App 核心介面,並優化 widget 結構與渲染,提升互動效能。</li>
+          <li class="en">Developed web pages and integrated frontend features with backend APIs for reliable, real-time data display.</li>
+          <li class="zh">開發網頁並整合前端與後端 API,穩定呈現即時資料。</li>
+          <li class="en">Worked as product manager alongside engineering, refining user flows to reduce UI-related issues and improve development efficiency.</li>
+          <li class="zh">兼任產品經理,優化使用者流程,減少 UI 相關問題並提升開發效率。</li>
+        </ul>
+      </div>
+    </article>
+
+    <article class="job">
+      <div class="job-meta">
+        <span class="dates"><span class="en">Present</span><span class="zh">目前</span></span>
+        <span>Taiwan</span>
+      </div>
+      <div class="job-body">
+        <h3><span class="en">Research Collaboration — AI Content Detection</span><span class="zh">研究合作專案 — AI 內容偵測</span></h3>
+        <p class="org">BIG DATA Co., Ltd.</p>
+        <ul>
+          <li class="en">Applied FastDetectGPT (zero-shot) to benchmark detection performance across multiple AI models.</li>
+          <li class="zh">運用 FastDetectGPT(zero-shot)對多種 AI 模型進行偵測效能基準測試。</li>
+          <li class="en">Designed experiments for dataset preparation, scoring and comparative analysis.</li>
+          <li class="zh">設計資料集準備、評分與比較分析的實驗流程。</li>
+          <li class="en">Analyzed accuracy, false positives and robustness for real-world text verification, and shared insights to enhance the company's AI content detection pipeline.</li>
+          <li class="zh">分析準確率、誤報與穩健性以因應實際文本驗證情境,並提供洞察協助優化公司的 AI 內容偵測流程。</li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section id="projects" class="reveal">
+    <div class="sec-head"><span class="num">03</span><h2><span class="en">Projects</span><span class="zh">專案</span></h2></div>
+    <article class="proj">
+      <h3><span class="en">Emotional-Support Platform</span><span class="zh">情緒支持平台</span></h3>
+      <p class="meta"><span class="en">Undergraduate capstone · Jan 2024 – Jan 2025</span><span class="zh">大學專題 · 2024 年 1 月 – 2025 年 1 月</span></p>
+      <ul>
+        <li class="en">Built an integrated emotional-support platform with a React frontend and Spring Boot / Python backend, combining a LINE chatbot and a web application.</li>
+        <li class="zh">以 React 前端與 Spring Boot / Python 後端建置整合式情緒支持平台,結合 LINE 聊天機器人與網頁應用。</li>
+        <li class="en">Designed medication reminders and usage tracking to improve communication between users with depressive tendencies and healthcare professionals.</li>
+        <li class="zh">設計服藥提醒與使用紀錄功能,改善有憂鬱傾向的使用者與醫療人員之間的溝通。</li>
+        <li class="en">Developed sentiment analysis, image analysis and conversation-logging modules for data-driven assessment of users' emotional states.</li>
+        <li class="zh">開發情緒分析、影像分析與對話紀錄模組,以資料輔助評估使用者的情緒狀態。</li>
+      </ul>
+      <div class="chips"><span class="chip">React</span><span class="chip">Spring Boot</span><span class="chip">Python</span><span class="chip">LINE Bot</span><span class="chip">Sentiment Analysis</span></div>
+    </article>
+  </section>
+
+  <section id="skills" class="reveal">
+    <div class="sec-head"><span class="num">04</span><h2><span class="en">Skills &amp; Education</span><span class="zh">技能與學歷</span></h2></div>
+    <div class="grid2">
+      <div class="card">
+        <h3><span class="en">Security &amp; Cloud</span><span class="zh">資安與雲端</span></h3>
+        <div class="chips">
+          <span class="chip">Vulnerability scanning</span><span class="chip">Authenticated scan</span><span class="chip">YAML rules</span>
+          <span class="chip">Linux (SUSE, AlmaLinux)</span><span class="chip">VMs &amp; containers</span><span class="chip">Protocol Buffers</span><span class="chip">CVE validation</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3><span class="en">Programming</span><span class="zh">程式開發</span></h3>
+        <div class="chips">
+          <span class="chip">Python</span><span class="chip">C++</span><span class="chip">Java</span><span class="chip">React</span><span class="chip">Spring Boot</span><span class="chip">Flutter</span>
+        </div>
+        <p style="margin-top:14px;font-size:14.5px;color:var(--muted)"><span class="en">100+ LeetCode problems solved in C++.</span><span class="zh">以 C++ 解過 100+ 題 LeetCode。</span></p>
+      </div>
+      <div class="card">
+        <h3><span class="en">AI / ML</span><span class="zh">AI / 機器學習</span></h3>
+        <div class="chips">
+          <span class="chip">Zero-shot detection</span><span class="chip">FastDetectGPT</span><span class="chip">Experiment design</span><span class="chip">Sentiment &amp; image analysis</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3><span class="en">Languages</span><span class="zh">語言</span></h3>
+        <div class="chips">
+          <span class="chip"><span class="en">English</span><span class="zh">英文</span></span>
+          <span class="chip"><span class="en">Mandarin</span><span class="zh">中文</span></span>
+          <span class="chip"><span class="en">German (basic)</span><span class="zh">德文(基礎)</span></span>
+        </div>
+      </div>
+      <div class="card edu">
+        <h3><span class="en">Education</span><span class="zh">學歷</span></h3>
+        <div>
+          <p class="when"><span class="en">Sep 2025 – Present</span><span class="zh">2025 年 9 月 – 現在</span></p>
+          <h3 style="font-size:1.02rem"><span class="en">M.S., Information Management</span><span class="zh">資訊管理學系碩士</span></h3>
+          <p class="sub"><span class="en">National Taiwan University</span><span class="zh">國立臺灣大學</span></p>
+        </div>
+        <div>
+          <p class="when"><span class="en">Sep 2021 – Jun 2025</span><span class="zh">2021 年 9 月 – 2025 年 6 月</span></p>
+          <h3 style="font-size:1.02rem"><span class="en">B.S., Information Management · GPA 4.0 / 4.3</span><span class="zh">資訊管理學系學士 · GPA 4.0 / 4.3</span></h3>
+          <p class="sub"><span class="en">National Central University</span><span class="zh">國立中央大學</span></p>
+        </div>
+      </div>
+      <div class="card">
+        <h3><span class="en">Awards &amp; Activities</span><span class="zh">獎項與活動</span></h3>
+        <ul class="awards">
+          <li><time>2024</time><span class="en">National Information Service Competition</span><span class="zh">全國資訊服務創新競賽</span></li>
+          <li><time>2023</time><span class="en">ATCC Business Case Competition, FarEasTone Division</span><span class="zh">ATCC 商業個案競賽,遠傳電信組</span></li>
+          <li><time>2023</time><span>Garmin Health Award</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer id="contact">
+  <div class="wrap">
+    <span>© 2026 LanZhen Huang · <a href="mailto:kelly920214@gmail.com">kelly920214@gmail.com</a></span>
+    <span class="sneak">
+      <span class="en">psst — a bunny is hiding here</span><span class="zh">噓——這裡藏了一隻兔子</span>
+      <button type="button" id="footBunny" aria-label="Open the bunny party"><canvas class="bunny-sprite" width="12" height="14"></canvas></button>
+    </span>
+  </div>
+</footer>
+
+<!-- bunny easter egg -->
+<div class="runner" id="runner" aria-hidden="true"><canvas class="bunny-sprite" width="12" height="14"></canvas></div>
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <span class="en">You found the bunny! 🐇 Want to join its party?</span>
+  <span class="zh">你找到兔子了!🐇 要不要加入牠的派對?</span>
+  <div class="toast-actions">
+    <button class="go" id="toastGo" type="button"><span class="en">Join the party</span><span class="zh">加入派對</span></button>
+    <button id="toastNo" type="button"><span class="en">Maybe later</span><span class="zh">晚點再說</span></button>
+  </div>
+</div>
+<dialog class="party" id="party" aria-label="Bunny party">
+  <div class="party-bar">
+    <strong><span class="en">Bunny party 🎉 — click the screen!</span><span class="zh">兔子派對 🎉 — 點一下畫面!</span></strong>
+    <a href="https://valentinaa0214.github.io/rabbitDancing/" target="_blank" rel="noopener"><span class="en">Open in new tab</span><span class="zh">在新分頁開啟</span></a>
+    <button type="button" id="partyClose"><span class="en">Close</span><span class="zh">關閉</span></button>
+  </div>
+  <iframe id="partyFrame" title="Dancing rabbit" allow="autoplay" loading="lazy"></iframe>
+  <p class="party-note"><span class="en">Plain HTML + Web Audio, no build step. <a href="https://github.com/Valentinaa0214/rabbitDancing" target="_blank" rel="noopener">View the source on GitHub</a></span><span class="zh">純 HTML + Web Audio,不需 build。<a href="https://github.com/Valentinaa0214/rabbitDancing" target="_blank" rel="noopener">到 GitHub 看原始碼</a></span></p>
+</dialog>
+
+<script>
+(() => {
+  'use strict';
+  const $ = (s, r = document) => r.querySelector(s);
+  const root = document.documentElement;
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- language ---------- */
+  const langBtn = $('#langBtn');
+  const TITLES = { en: 'LanZhen Huang · R&D Intern @ Trend AI', zh: '黃蘭榛 LanZhen Huang · Trend AI 研發實習生' };
+  function setLang(l, save) {
+    root.dataset.lang = l;
+    root.lang = l === 'zh' ? 'zh-Hant' : 'en';
+    langBtn.textContent = l === 'zh' ? 'EN' : '中文';
+    langBtn.setAttribute('aria-label', l === 'zh' ? 'Switch to English' : '切換為中文');
+    document.title = TITLES[l];
+    if (save) { try { localStorage.setItem('lang', l); } catch (e) {} }
+  }
+  let saved = null; try { saved = localStorage.getItem('lang'); } catch (e) {}
+  setLang(saved || ((navigator.language || '').toLowerCase().startsWith('zh') ? 'zh' : 'en'), false);
+  langBtn.addEventListener('click', () => setLang(root.dataset.lang === 'zh' ? 'en' : 'zh', true));
+
+  /* ---------- top bar + reveal ---------- */
+  const bar = $('#topbar');
+  const onScroll = () => bar.classList.toggle('scrolled', scrollY > 8);
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  const reveals = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    reveals.forEach(el => io.observe(el));
+  } else reveals.forEach(el => el.classList.add('in'));
+
+  /* ---------- pixel bunny sprite (original little bunny) ---------- */
+  const SPRITE = [
+    '..PP....PP..',
+    '..PP....PP..',
+    '..PW....PW..',
+    '..PW....PW..',
+    '.PPPPPPPPPP.',
+    '.PPPPPPPPPP.',
+    '.PPDPPPPDPP.',
+    '.PPPPPPPPPP.',
+    '.PPPPNNPPPP.',
+    '.PPPPPPPPPP.',
+    '..PPPPPPPP..',
+    '..PPPPPPPP..',
+    '..PP.PP.PP..',
+    '..WW....WW..'
+  ];
+  const PAL = { P: '#ff8fc0', W: '#fff2f8', D: '#3a0f26', N: '#d9467f' };
+  document.querySelectorAll('.bunny-sprite').forEach(c => {
+    const g = c.getContext('2d');
+    SPRITE.forEach((row, y) => [...row].forEach((ch, x) => { if (PAL[ch]) { g.fillStyle = PAL[ch]; g.fillRect(x, y, 1, 1); } }));
+  });
+
+  const toast = $('#toast'), runner = $('#runner'), party = $('#party'), frame = $('#partyFrame'), hint = $('#hint');
+  const PARTY_URL = 'https://valentinaa0214.github.io/rabbitDancing/';
+  let toastTimer = 0, found = false;
+  function showBunny() {
+    if (!found) { found = true; hint.classList.add('done'); }
+    runner.classList.remove('run'); void runner.offsetWidth; runner.classList.add('run');
+    clearTimeout(toastTimer);
+    toast.classList.add('show');
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 12000);
+    runner.addEventListener('animationend', () => runner.classList.remove('run'), { once: true });
+  }
+  function openParty() {
+    toast.classList.remove('show');
+    if (!frame.src) frame.src = PARTY_URL;
+    if (typeof party.showModal === 'function') party.showModal(); else window.open(PARTY_URL, '_blank', 'noopener');
+  }
+  $('#toastGo').addEventListener('click', openParty);
+  $('#toastNo').addEventListener('click', () => toast.classList.remove('show'));
+  $('#footBunny').addEventListener('click', openParty);
+  $('#partyClose').addEventListener('click', () => party.close());
+  party.addEventListener('click', (e) => { if (e.target === party) party.close(); });
+  party.addEventListener('close', () => { frame.removeAttribute('src'); });
+
+  /* ---------- jelly portrait ---------- */
+  // Two renderers share one input handler:
+  //  - WebGL: a deformable mesh with spring physics (the full jelly effect)
+  //  - CSS fallback: a springy skew/stretch of the <img>, used when WebGL or the texture is unavailable
+  const stage = $('#stage'), canvas = $('#portraitGL'), img = $('#portraitImg');
+  const SNAP_RATIO = 0.34;                      // pull farther than this (x stage width) to release the bunny
+  const st = { drag: false, hover: false, gx: 0, gy: 0, dx: 0, dy: 0, px: 0, py: 0, id: null, t0: 0, raw: 0 };
+  let engine = null;                            // WebGL engine once ready; null means the CSS fallback is active
+  const smooth = (a, b, x) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t); };
+
+  /* CSS fallback renderer */
+  const cssEngine = (() => {
+    let x = 0, y = 0, vx = 0, vy = 0, tx = 0, ty = 0, running = false, last = 0;
+    img.style.transformOrigin = '50% 100%';
+    img.style.willChange = 'transform';
+    function apply() {
+      const h = stage.clientHeight || 1;
+      const sy = Math.min(1.6, Math.max(0.65, 1 - y / h));   // pulling up stretches taller
+      const sx = 1 + Math.min(0.25, Math.abs(x) / h * 0.3);
+      img.style.transform = 'skewX(' + Math.atan2(-x, h) + 'rad) scale(' + sx.toFixed(4) + ',' + sy.toFixed(4) + ')';
+    }
+    function frame(t) {
+      const dt = Math.min((t - last) / 1000, 0.05); last = t;
+      const k = st.drag ? 300 : 110, c = st.drag ? 30 : (reduceMotion ? 21 : 8.5);
+      const sub = Math.max(1, Math.ceil(dt * 120)), h = dt / sub;
+      for (let s = 0; s < sub; s++) {
+        vx += (-k * (x - tx) - c * vx) * h; vy += (-k * (y - ty) - c * vy) * h;
+        x += vx * h; y += vy * h;
+      }
+      apply();
+      if (st.drag || Math.abs(x) + Math.abs(y) + (Math.abs(vx) + Math.abs(vy)) * 0.05 > 0.05) requestAnimationFrame(frame);
+      else { x = y = vx = vy = 0; img.style.transform = ''; running = false; }
+    }
+    function wake() { if (running) return; running = true; last = performance.now(); requestAnimationFrame(frame); }
+    return {
+      grab() { wake(); },
+      move() { tx = st.dx * 0.8; ty = st.dy * 0.8; wake(); },
+      release() { tx = ty = 0; wake(); },
+      poke() { vy -= 380; wake(); },
+      hover() {}, unhover() {}
+    };
+  })();
+
+  /* WebGL renderer */
+  function initGL(texSource) {
+    const gl = canvas.getContext('webgl', { alpha: true, premultipliedAlpha: true, antialias: true });
+    if (!gl) return null;
+
+    const COLS = 14, ROWS = 18, NV = (COLS + 1) * (ROWS + 1);
+    const rx = new Float32Array(NV), ry = new Float32Array(NV);
+    const ox = new Float32Array(NV), oy = new Float32Array(NV);
+    const vx = new Float32Array(NV), vy = new Float32Array(NV);
+    const nvx = new Float32Array(NV), nvy = new Float32Array(NV);
+    const gw = new Float32Array(NV), fw = new Float32Array(NV);
+    const pos = new Float32Array(NV * 2), uv = new Float32Array(NV * 2);
+
+    // Anchor factor: the upper body moves freely, the bottom stays rooted in the card
+    for (let r = 0; r <= ROWS; r++) for (let c = 0; c <= COLS; c++) {
+      const i = r * (COLS + 1) + c;
+      uv[i * 2] = c / COLS; uv[i * 2 + 1] = r / ROWS;
+      fw[i] = 1 - 0.92 * smooth(0.5, 1, r / ROWS);
+    }
+    const idx = [];
+    for (let r = 0; r < ROWS; r++) for (let c = 0; c < COLS; c++) {
+      const a = r * (COLS + 1) + c, b = a + 1, d = a + COLS + 1, e = d + 1;
+      idx.push(a, b, d, b, e, d);
+    }
+
+    const vsrc = 'attribute vec2 aPos;attribute vec2 aUV;uniform vec2 uRes;varying vec2 vUV;void main(){vUV=aUV;gl_Position=vec4(aPos.x/uRes.x*2.0-1.0,1.0-aPos.y/uRes.y*2.0,0.0,1.0);}';
+    const fsrc = 'precision mediump float;uniform sampler2D uTex;varying vec2 vUV;void main(){gl_FragColor=texture2D(uTex,vUV);}';
+    let posBuf, uRes;
+    try {
+      const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; };
+      const prog = gl.createProgram();
+      gl.attachShader(prog, sh(gl.VERTEX_SHADER, vsrc)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fsrc));
+      gl.linkProgram(prog); if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error('link failed');
+      gl.useProgram(prog);
+      posBuf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, posBuf); gl.bufferData(gl.ARRAY_BUFFER, pos.byteLength, gl.DYNAMIC_DRAW);
+      const aPos = gl.getAttribLocation(prog, 'aPos'); gl.enableVertexAttribArray(aPos); gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0);
+      const uvBuf = gl.createBuffer();
+      gl.bindBuffer(gl.ARRAY_BUFFER, uvBuf); gl.bufferData(gl.ARRAY_BUFFER, uv, gl.STATIC_DRAW);
+      const aUV = gl.getAttribLocation(prog, 'aUV'); gl.enableVertexAttribArray(aUV); gl.vertexAttribPointer(aUV, 2, gl.FLOAT, false, 0, 0);
+      const ib = gl.createBuffer(); gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ib); gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array(idx), gl.STATIC_DRAW);
+      uRes = gl.getUniformLocation(prog, 'uRes');
+
+      // Texture upload throws a SecurityError for cross-origin images, which is why file:// uses a data URI
+      const tex = gl.createTexture();
+      gl.bindTexture(gl.TEXTURE_2D, tex);
+      gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, texSource);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      if (gl.getError() !== gl.NO_ERROR) throw new Error('GL error during setup');
+    } catch (err) {
+      console.warn('[portrait] WebGL unavailable, using CSS fallback:', err && err.message);
+      return null;
+    }
+    gl.clearColor(0, 0, 0, 0);
+
+    let IW = 0, IH = 0, PAD = 0, CW = 0, CH = 0;
+    function layout() {
+      const rect = stage.getBoundingClientRect();
+      IW = rect.width; IH = rect.height; if (!IW) return;
+      PAD = Math.round(IW * 0.34);               // room around the photo so stretched parts are not clipped
+      CW = IW + PAD * 2; CH = IH + PAD * 2;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.style.left = canvas.style.top = -PAD + 'px';
+      canvas.style.width = CW + 'px'; canvas.style.height = CH + 'px';
+      canvas.width = Math.round(CW * dpr); canvas.height = Math.round(CH * dpr);
+      gl.viewport(0, 0, canvas.width, canvas.height); gl.uniform2f(uRes, CW, CH);
+      for (let r = 0; r <= ROWS; r++) for (let c = 0; c <= COLS; c++) {
+        const i = r * (COLS + 1) + c; rx[i] = c / COLS * IW; ry[i] = r / ROWS * IH;
+      }
+      ox.fill(0); oy.fill(0); vx.fill(0); vy.fill(0);
+      draw();
+    }
+
+    // Spring constants: K = return-to-rest, C = damping, KN = neighbour coupling, KD/CD = while dragging
+    const K = 110, C = reduceMotion ? 2 * Math.sqrt(K) : 8.5, KN = 62, KD = 300, CD = 30;
+    const sigma = () => IW * 0.2;                // radius of influence around the grab point
+
+    function step(h) {
+      let e = 0; const s2 = 2 * sigma() * sigma();
+      for (let r = 0; r <= ROWS; r++) for (let c = 0; c <= COLS; c++) {
+        const i = r * (COLS + 1) + c;
+        let sx = 0, sy = 0, n = 0;
+        if (c > 0) { sx += ox[i - 1]; sy += oy[i - 1]; n++; }
+        if (c < COLS) { sx += ox[i + 1]; sy += oy[i + 1]; n++; }
+        if (r > 0) { sx += ox[i - COLS - 1]; sy += oy[i - COLS - 1]; n++; }
+        if (r < ROWS) { sx += ox[i + COLS + 1]; sy += oy[i + COLS + 1]; n++; }
+        let tx = 0, ty = 0, k = K, cd = C;
+        if (st.drag) { tx = gw[i] * fw[i] * st.dx; ty = gw[i] * fw[i] * st.dy; k = KD; cd = CD; }
+        else if (st.hover && !reduceMotion) {
+          // Subtle "magnet": vertices near the cursor lean towards it
+          const ddx = rx[i] - st.px, ddy = ry[i] - st.py, w = Math.exp(-(ddx * ddx + ddy * ddy) / s2) * fw[i] * 0.1;
+          tx = -ddx * w; ty = -ddy * w;
+        }
+        nvx[i] = vx[i] + (-k * (ox[i] - tx) - cd * vx[i] + KN * (sx / n - ox[i])) * h;
+        nvy[i] = vy[i] + (-k * (oy[i] - ty) - cd * vy[i] + KN * (sy / n - oy[i])) * h;
+      }
+      for (let i = 0; i < NV; i++) {
+        vx[i] = nvx[i]; vy[i] = nvy[i]; ox[i] += vx[i] * h; oy[i] += vy[i] * h;
+        e = Math.max(e, Math.abs(ox[i]) + Math.abs(oy[i]) + (Math.abs(vx[i]) + Math.abs(vy[i])) * 0.05);
+      }
+      return e;
+    }
+    function draw() {
+      for (let i = 0; i < NV; i++) { pos[i * 2] = rx[i] + PAD + ox[i]; pos[i * 2 + 1] = ry[i] + PAD + oy[i]; }
+      gl.clear(gl.COLOR_BUFFER_BIT);
+      gl.bindBuffer(gl.ARRAY_BUFFER, posBuf); gl.bufferSubData(gl.ARRAY_BUFFER, 0, pos);
+      gl.drawElements(gl.TRIANGLES, idx.length, gl.UNSIGNED_SHORT, 0);
+    }
+    let running = false, last = 0, energy = 0;
+    function loop(t) {
+      const dt = Math.min((t - last) / 1000, 0.05); last = t;
+      const sub = Math.max(1, Math.ceil(dt * 120)), h = dt / sub;   // fixed-ish 120 Hz substeps for stability
+      for (let s = 0; s < sub; s++) energy = step(h);
+      draw();
+      if (st.drag || st.hover || energy > 0.03) requestAnimationFrame(loop);
+      else { ox.fill(0); oy.fill(0); vx.fill(0); vy.fill(0); draw(); running = false; }
+    }
+    function wake() { if (running) return; running = true; last = performance.now(); requestAnimationFrame(loop); }
+    function weightsAt(gx, gy) {
+      const s2 = 2 * sigma() * sigma();
+      for (let i = 0; i < NV; i++) { const a = rx[i] - gx, b = ry[i] - gy; gw[i] = Math.exp(-(a * a + b * b) / s2); }
+    }
+
+    layout();
+    new ResizeObserver(layout).observe(stage);
+    stage.classList.add('gl');
+    return {
+      ox, oy,
+      grab(x, y) { weightsAt(x, y); wake(); },
+      move() { wake(); },
+      release() { wake(); },
+      poke(gx, gy) {
+        // Radial velocity impulse around the tap point
+        weightsAt(gx, gy);
+        for (let i = 0; i < NV; i++) {
+          const a = rx[i] - gx, b = ry[i] - gy, d = Math.hypot(a, b) + 20, w = gw[i] * fw[i];
+          vx[i] += w * (a / d) * 260; vy[i] += w * (b / d) * 260 - w * 90;
+        }
+        wake();
+      },
+      hover(x, y) { st.px = x; st.py = y; st.hover = true; wake(); },
+      unhover() { st.hover = false; wake(); }
+    };
+  }
+
+  /* Input handling (listeners live on the stage; the oversized canvas ignores the mouse) */
+  const E = () => engine || cssEngine;
+  const local = (e) => { const b = stage.getBoundingClientRect(); return [e.clientX - b.left, e.clientY - b.top]; };
+  stage.addEventListener('pointerdown', (e) => {
+    if (e.button !== 0) return;
+    const [x, y] = local(e);
+    Object.assign(st, { drag: true, id: e.pointerId, gx: x, gy: y, dx: 0, dy: 0, raw: 0, t0: performance.now() });
+    try { stage.setPointerCapture(e.pointerId); } catch (_) {}
+    stage.classList.add('is-grabbing');
+    E().grab(x, y);
+    if (!found) hint.classList.add('done');
+    e.preventDefault();
+  });
+  stage.addEventListener('pointermove', (e) => {
+    const [x, y] = local(e);
+    if (st.drag && e.pointerId === st.id) {
+      const rawx = x - st.gx, rawy = y - st.gy, len = Math.hypot(rawx, rawy), L = stage.clientWidth * 0.3;
+      const k = len > 0 ? L * Math.tanh(len / L) / len : 0;   // rubber-band resistance
+      st.dx = rawx * k; st.dy = rawy * k; st.raw = len;
+      E().move();
+    } else if (e.pointerType === 'mouse') E().hover(x, y);
+  });
+  function release(e) {
+    if (!st.drag || e.pointerId !== st.id) return;
+    st.drag = false; stage.classList.remove('is-grabbing');
+    try { stage.releasePointerCapture(e.pointerId); } catch (_) {}
+    const quick = performance.now() - st.t0 < 350;
+    if (st.raw > stage.clientWidth * SNAP_RATIO) showBunny();
+    else if (st.raw < 6 && quick) E().poke(st.gx, st.gy);
+    E().release();
+  }
+  stage.addEventListener('pointerup', release);
+  stage.addEventListener('pointercancel', release);
+  stage.addEventListener('lostpointercapture', release);
+  stage.addEventListener('pointerleave', () => E().unhover());
+  stage.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); E().poke(stage.clientWidth * 0.5, stage.clientHeight * 0.3); }
+  });
+  stage.addEventListener('dragstart', (e) => e.preventDefault());
+
+  /* Boot: pick a texture source WebGL is allowed to read */
+  function boot(source) { engine = initGL(source); }
+  function whenLoaded(im, cb) { if (im.complete && im.naturalWidth) cb(im); else im.addEventListener('load', () => cb(im), { once: true }); }
+  if (location.protocol === 'file:') {
+    // Opened by double-clicking: local files count as cross-origin for WebGL, so load an embedded data URI copy
+    const s = document.createElement('script');
+    s.src = 'assets/portrait-data.js';
+    s.onload = () => {
+      if (!window.PORTRAIT_DATA_URI) return;
+      const im = new Image();
+      im.onload = () => boot(im);
+      im.src = window.PORTRAIT_DATA_URI;
+    };
+    document.head.appendChild(s);
+  } else {
+    whenLoaded(img, boot);
+  }
+  window.__jelly = { st, get mode() { return engine ? 'webgl' : 'css'; }, get ox() { return engine ? engine.ox : null; } };   // handy for debugging
+})();
+</script>
+</body>
+</html>
