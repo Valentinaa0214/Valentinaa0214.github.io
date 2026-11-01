@@ -62,6 +62,18 @@ html[data-lang="zh"] .en{display:none!important}
 /* ---------- hero ---------- */
 .hero{padding:44px 0 72px; overflow-x:clip}
 .hero-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:56px; align-items:center}
+/* "currently" status pill with a live pulse dot */
+.now{
+  display:inline-flex; align-items:center; gap:9px; margin:0 0 18px; padding:6px 14px 6px 11px;
+  font-size:13.5px; font-weight:600; color:#14532d; background:#ecfdf3; border:1px solid #c6f0d5; border-radius:999px;
+}
+.pulse{position:relative; width:8px; height:8px; border-radius:50%; background:#22c55e; flex:none}
+.pulse::after{
+  content:""; position:absolute; inset:0; border-radius:50%; background:#22c55e;
+  animation:pulse 1.8s ease-out infinite;
+}
+@keyframes pulse{0%{transform:scale(1); opacity:.6}100%{transform:scale(3.2); opacity:0}}
+@media (prefers-reduced-motion:reduce){ .pulse::after{animation:none} }
 .eyebrow{
   margin:0 0 14px; font-size:13px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--accent);
 }
@@ -70,7 +82,8 @@ h1 .cn{
   display:block; margin-top:10px; font-size:clamp(1.05rem,2vw,1.3rem); font-weight:500; letter-spacing:.18em; color:var(--muted);
 }
 .lead{margin:22px 0 0; font-size:1.12rem; color:#2c3550; max-width:34em}
-.cta{display:flex; flex-wrap:wrap; gap:10px; margin-top:28px}
+.cta{display:flex; flex-wrap:wrap; gap:8px; margin-top:28px}
+.cta .btn{padding:10px 15px; font-size:14.5px}
 .btn{
   display:inline-flex; align-items:center; gap:9px; padding:11px 18px; border-radius:999px;
   border:1px solid var(--line); background:#fff; color:var(--ink); font-weight:600; font-size:15px; text-decoration:none;
@@ -260,6 +273,10 @@ dialog.party[open]{display:flex; flex-direction:column}
 <header class="hero" id="top">
   <div class="wrap hero-grid">
     <div class="hero-copy">
+      <p class="now">
+        <span class="pulse" aria-hidden="true"></span>
+        <span class="en">Currently interning at Trend AI</span><span class="zh">目前在 Trend AI 實習中</span>
+      </p>
       <p class="eyebrow">
         <span class="en">R&amp;D Intern · Cybersecurity &amp; Cloud Engineering</span>
         <span class="zh">研發實習生 · 資安與雲端工程</span>
@@ -270,7 +287,11 @@ dialog.party[open]{display:flex; flex-direction:column}
         <span class="zh">國立臺灣大學資訊管理學系碩士生。目前在 Trend AI 參與 Linux 主機與網路設備的弱點掃描,從測試環境建置到 CVE 比對驗證。</span>
       </p>
       <div class="cta">
-        <a class="btn primary" href="mailto:valentina0214@ntu.im">
+        <a class="btn primary" href="assets/LanZhenHuang_Resume.pdf" download="LanZhenHuang_Resume.pdf">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5"/><path d="M5 19h14"/></svg>
+          <span class="en">Download Resume</span><span class="zh">下載履歷</span>
+        </a>
+        <a class="btn" href="mailto:valentina0214@ntu.im">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
           <span>Email</span>
         </a>
