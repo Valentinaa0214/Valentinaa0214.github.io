@@ -64,13 +64,13 @@ html[data-lang="zh"] .en{display:none!important}
 .hero-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:56px; align-items:center}
 /* "currently" status pill with a live pulse dot */
 .now{
-  display:inline-flex; align-items:center; gap:9px; margin:0 0 18px; padding:6px 14px 6px 11px;
-  font-size:13.5px; font-weight:600; color:#14532d; background:#ecfdf3; border:1px solid #c6f0d5; border-radius:999px;
+  display:flex; align-items:center; gap:9px; margin:0 0 10px;
+  font-size:12.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#16a34a;
 }
 .pulse{position:relative; width:8px; height:8px; border-radius:50%; background:#22c55e; flex:none}
 .pulse::after{
   content:""; position:absolute; inset:0; border-radius:50%; background:#22c55e;
-  animation:pulse 1.8s ease-out infinite;
+  animation:pulse 1.6s ease-out infinite;
 }
 @keyframes pulse{0%{transform:scale(1); opacity:.6}100%{transform:scale(3.2); opacity:0}}
 @media (prefers-reduced-motion:reduce){ .pulse::after{animation:none} }
@@ -275,7 +275,7 @@ dialog.party[open]{display:flex; flex-direction:column}
     <div class="hero-copy">
       <p class="now">
         <span class="pulse" aria-hidden="true"></span>
-        <span class="en">Currently interning at Trend AI</span><span class="zh">目前在 Trend AI 實習中</span>
+        <span class="en">Now</span><span class="zh">現職</span>
       </p>
       <p class="eyebrow">
         <span class="en">R&amp;D Intern · Cybersecurity &amp; Cloud Engineering</span>
@@ -288,8 +288,8 @@ dialog.party[open]{display:flex; flex-direction:column}
       </p>
       <div class="cta">
         <a class="btn primary" href="assets/LanZhenHuang_Resume.pdf" download="LanZhenHuang_Resume.pdf">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11m0 0l-4.5-4.5M12 15l4.5-4.5"/><path d="M5 19h14"/></svg>
-          <span class="en">Download Resume</span><span class="zh">下載履歷</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>
+          <span>CV</span>
         </a>
         <a class="btn" href="mailto:valentina0214@ntu.im">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
