@@ -207,23 +207,13 @@ footer .wrap{display:flex; flex-wrap:wrap; gap:12px 24px; align-items:center; ju
 .sneak canvas{width:26px; height:30px; image-rendering:pixelated; opacity:.9}
 
 /* ---------- bunny easter egg ---------- */
-.toast{
-  position:fixed; left:50%; bottom:28px; z-index:90; transform:translate(-50%,30px); opacity:0; pointer-events:none;
-  display:flex; align-items:center; gap:14px; flex-wrap:wrap; justify-content:center; max-width:min(92vw,660px);
-  background:var(--ink); color:#fff; padding:14px 18px; border-radius:16px; font-size:14.5px;
-  box-shadow:0 20px 50px -20px rgba(0,0,0,.6); transition:transform .35s cubic-bezier(.2,.9,.3,1.2), opacity .25s;
-}
-.toast.show{transform:translate(-50%,0); opacity:1; pointer-events:auto}
-.toast-actions{display:flex; gap:8px}
-.toast button{
-  font:inherit; font-size:13.5px; font-weight:600; border-radius:999px; padding:7px 14px; cursor:pointer; border:1px solid rgba(255,255,255,.28);
-  background:transparent; color:#fff;
-}
-.toast button.go{background:#ff8fc0; border-color:#ff8fc0; color:#3a0f26}
 .runner{
-  position:fixed; bottom:0; left:-90px; z-index:80; pointer-events:none; display:none;
+  all:unset; position:fixed; bottom:0; left:-90px; z-index:80; display:none; padding:10px 8px 0;
+  cursor:pointer; -webkit-tap-highlight-color:transparent;
 }
-.runner.run{display:block; animation:cross 5.6s linear forwards}
+.runner.run{display:block; animation:cross 8s linear forwards}
+.runner:hover{animation-play-state:paused}   /* hovering "catches" the bunny so it is easy to click */
+.runner:focus-visible{outline:2px solid var(--accent-2); outline-offset:2px; border-radius:10px}
 .runner canvas{width:72px; height:84px; image-rendering:pixelated; animation:hop .46s cubic-bezier(.3,.7,.4,1) infinite; transform-origin:50% 100%; display:block}
 @keyframes cross{from{left:-90px}to{left:calc(100vw + 20px)}}
 @keyframes hop{0%,100%{transform:translateY(0) scale(1.08,.9)}45%{transform:translateY(-54px) scale(.94,1.08)}}
@@ -250,7 +240,7 @@ dialog.party[open]{display:flex; flex-direction:column}
   html{scroll-behavior:auto}
   .reveal{opacity:1; transform:none; transition:none}
   .hint svg{animation:none}
-  .runner.run{animation-duration:0.01s}
+  .runner.run{animation:none; left:auto; right:24px}
   .runner canvas{animation:none}
 }
 </style>
@@ -493,15 +483,7 @@ dialog.party[open]{display:flex; flex-direction:column}
 </footer>
 
 <!-- bunny easter egg -->
-<div class="runner" id="runner" aria-hidden="true"><canvas class="bunny-sprite" width="12" height="14"></canvas></div>
-<div class="toast" id="toast" role="status" aria-live="polite">
-  <span class="en">You found the bunny! 🐇 Want to join its party?</span>
-  <span class="zh">你找到兔子了!🐇 要不要加入牠的派對?</span>
-  <div class="toast-actions">
-    <button class="go" id="toastGo" type="button"><span class="en">Join the party</span><span class="zh">加入派對</span></button>
-    <button id="toastNo" type="button"><span class="en">Maybe later</span><span class="zh">晚點再說</span></button>
-  </div>
-</div>
+<button type="button" class="runner" id="runner" aria-label="Catch the bunny to join its party"><canvas class="bunny-sprite" width="12" height="14"></canvas></button>
 <dialog class="party" id="party" aria-label="Bunny party">
   <div class="party-bar">
     <strong><span class="en">Bunny party 🎉 — click the screen!</span><span class="zh">兔子派對 🎉 — 點一下畫面!</span></strong>
@@ -566,25 +548,23 @@ dialog.party[open]{display:flex; flex-direction:column}
     SPRITE.forEach((row, y) => [...row].forEach((ch, x) => { if (PAL[ch]) { g.fillStyle = PAL[ch]; g.fillRect(x, y, 1, 1); } }));
   });
 
-  const toast = $('#toast'), runner = $('#runner'), party = $('#party'), frame = $('#partyFrame'), hint = $('#hint');
+  const runner = $('#runner'), party = $('#party'), frame = $('#partyFrame'), hint = $('#hint');
   const PARTY_URL = 'https://rabbitdancing.pages.dev/';
-  let toastTimer = 0, found = false;
+  let found = false, runTimer = 0;
+  // Pulling the portrait far enough sends a bunny hopping across the screen; catching it opens the party
   function showBunny() {
     if (!found) { found = true; hint.classList.add('done'); }
     runner.classList.remove('run'); void runner.offsetWidth; runner.classList.add('run');
-    clearTimeout(toastTimer);
-    toast.classList.add('show');
-    toastTimer = setTimeout(() => toast.classList.remove('show'), 12000);
-    runner.addEventListener('animationend', () => runner.classList.remove('run'), { once: true });
+    clearTimeout(runTimer);
+    if (reduceMotion) runTimer = setTimeout(() => runner.classList.remove('run'), 8000);   // no crossing animation, so hide it later
   }
+  runner.addEventListener('animationend', (e) => { if (e.target === runner) runner.classList.remove('run'); });
+  runner.addEventListener('click', () => { runner.classList.remove('run'); openParty(); });
   function openParty() {
-    toast.classList.remove('show');
     if (typeof party.showModal !== 'function') { window.open(PARTY_URL, '_blank', 'noopener'); return; }
     if (!frame.src) frame.src = PARTY_URL;   // lazy-load the party only when it is opened
     party.showModal();
   }
-  $('#toastGo').addEventListener('click', openParty);
-  $('#toastNo').addEventListener('click', () => toast.classList.remove('show'));
   $('#footBunny').addEventListener('click', openParty);
   $('#partyClose').addEventListener('click', () => party.close());
   party.addEventListener('click', (e) => { if (e.target === party) party.close(); });
