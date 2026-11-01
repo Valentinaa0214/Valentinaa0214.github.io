@@ -503,7 +503,7 @@ dialog.party[open]{display:flex; flex-direction:column}
     if (save) { try { localStorage.setItem('lang', l); } catch (e) {} }
   }
   let saved = null; try { saved = localStorage.getItem('lang'); } catch (e) {}
-  setLang(saved || ((navigator.language || '').toLowerCase().startsWith('zh') ? 'zh' : 'en'), false);
+  setLang(saved === 'zh' ? 'zh' : 'en', false);   // English by default; only a choice made with the toggle switches it
   langBtn.addEventListener('click', () => setLang(root.dataset.lang === 'zh' ? 'en' : 'zh', true));
 
   /* ---------- top bar + reveal ---------- */
